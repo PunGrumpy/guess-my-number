@@ -21,4 +21,8 @@
 
 <div>
   <h3>Todo Lists</h3>
+  <ul style="list-style-type:none;">
+    <li><input type="checkbox" checked="checked" disabled="disabled" />Readme</li>
+    <li><input type="checkbox" disabled="disabled" />Main</li>
+  </ul>
 </div>
