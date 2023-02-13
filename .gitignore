@@ -1,0 +1,36 @@
+# Environment
+.env
+.env.local
+.env.development.local
+.env.test.local
+
+# Complierer file
+**.class
+
+# Package file
+*.war
+*.jar
+
+# Maven
+target/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Visual Studio Code
+.vscode/
+
+# NetBeans
+nbproject/private/
+
+# IntelliJ
+*.iml
+.idea/
+
+# MacOS
+.DS_Store
+
+# Linux
+*~
