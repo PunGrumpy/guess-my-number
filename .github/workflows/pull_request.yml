@@ -23,7 +23,7 @@ jobs:
           pr_milestone: 'Milestone 1'
           pr_draft: true
           pr_allow_empty: true
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PULL_REQUEST }}
       - name: output
         run: |
           echo "Pull Request Number - ${{ steps.open-pr.outputs.pr_number }}"
