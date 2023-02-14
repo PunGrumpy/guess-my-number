@@ -6,6 +6,7 @@
 
 # Folder
 bin/
+env/
 
 # Complierer file
 **.class
