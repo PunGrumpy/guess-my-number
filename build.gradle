@@ -1,0 +1,11 @@
+plugins {
+  id "org.sonarqube" version "3.5.0.2730"
+}
+
+sonarqube {
+  properties {
+    property "sonar.projectKey", "PunGrumpy_java-game"
+    property "sonar.organization", "pungrumpy"
+    property "sonar.host.url", "https://sonarcloud.io"
+  }
+}

@@ -8,6 +8,9 @@
 bin/
 env/
 
+# Gradle
+.gradle/
+
 # Complierer file
 **.class
 
