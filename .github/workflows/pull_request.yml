@@ -1,18 +1,5 @@
 name: Pull Request Workflow
-on:
-  pull_request:
-    branches:
-      - feature/*
-      - demo/*
-    types:
-      [
-        opened,
-        synchronize,
-        reopened,
-        assigned,
-        review_requested,
-        ready_for_review
-      ]
+on: [pull_request]
 jobs:
   pull-request:
     runs-on: ubuntu-latest
