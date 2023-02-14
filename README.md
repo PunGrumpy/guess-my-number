@@ -12,11 +12,11 @@
 
 <div>
   <h3>Table of contents</h3>
-  <pre>
-    <code>
-      - Main.java
-    </code>
-  </pre>
+  
+  ```bash
+  main
+  ```
+
 </div>
 
 <div>
@@ -25,4 +25,17 @@
   - [x] Readme
   - [ ] Main
   
+</div>
+
+<div>
+  <h3>TIPs</h3>
+  
+  ```bash
+  # How to delete all class file
+  rm -rf **/**.class
+  
+  # Compile all java file
+  javac **/**.java -d ../../bin
+  ```
+
 </div>
