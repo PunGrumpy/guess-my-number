@@ -1,5 +1,5 @@
 name: Pull Request Workflow
-on: [pull_request]
+on: [push]
 jobs:
   pull-request:
     runs-on: ubuntu-latest
@@ -11,16 +11,15 @@ jobs:
         uses: repo-sync/pull-request@v2
         with:
           destination_branch: main
-          pr_title: 'Pull Request from ${{ github.head_ref }} to ${{ github.base_ref }}'
+          pr_title: 'Pull Request from ${{ github.ref }} to main'
           pr_body: |
-            :robot: This pull request was automatically
+            :robot: *This pull request was automatically*
 
             _Created by [repo-sync/pull-request](https://github.com/repo-sync/pull-request)_
           pr_template: '.github/PULL_REQUEST_TEMPLATE.md'
-          pr_reviewers: 'github-actions[bot]'
-          pr_assignees: 'github-actions[bot]'
+          pr_reviewers: 'PunGrumpy'
           pr_labels: 'auto-pr'
-          pr_milestone: 'Milestone 1'
+          pr_milestone: 'Milestone'
           pr_draft: true
           pr_allow_empty: true
           github_token: ${{ secrets.PULL_REQUEST }}
