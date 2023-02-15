@@ -1,7 +1,7 @@
 name: Prettier Java
 on: [push, pull_request]
 jobs:
-  test:
+  setup_node:
     name: unit tests (node ${{ matrix.node_version }})
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[skip github]')"
@@ -10,9 +10,6 @@ jobs:
         node_version:
           - 16.x
           - 18.x
-  setup_node:
-    needs: test
-    runs-on: ubuntu-latest
     steps:
       - name: Use Node.js ${{ matrix.node_version }}
         uses: actions/setup-node@v3
