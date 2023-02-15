@@ -8,49 +8,49 @@ jobs:
     strategy:
       matrix:
         node_version:
-          - 14.x
           - 16.x
           - 18.x
-    steps:
-      - name: checkout code
-        uses: actions/checkout@v3
-      - name: setup node
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node_version }}
-      - name: setup java
-        uses: actions/setup-java@v2
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-      - name: install dependencies
-        run: npm install prettier-plugin-java
-      - name: prettier java
-        run: npx prettier --write "**/*.java"
-  pull-request:
+  setup_node:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - name: checkout code
-        uses: actions/checkout@v3
-      - name: pull request
-        id: open-pr
-        uses: repo-sync/pull-request@v2
+      - name: Use Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@v3
         with:
-          destination_branch: main
-          pr_title: 'Pull Request from ${{ github.ref }} to main'
-          pr_body: |
-            :robot: *This pull request was automatically*
-
-            _Created by [repo-sync/pull-request](https://github.com/repo-sync/pull-request)_
-          pr_reviewers: 'PunGrumpy'
-          pr_labels: 'auto-pr'
-          pr_milestone: 'Milestone'
-          pr_draft: true
-          pr_allow_empty: true
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: output
-        run: |
-          echo "Pull Request Number - ${{ steps.open-pr.outputs.pr_number }}"
-          echo "Pull Request URL - ${{ steps.open-pr.outputs.pr_url }}"
-          echo "Pull Request Created - ${{ steps.open-pr.outputs.pr_created }}"
+          node-version: ${{ matrix.node_version }}
+      - name: Install prettier java
+        run: npm install prettier-plugin-java
+  setup_java:
+    needs: setup_node
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Java 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+          distribution: 'temurin'
+  prettier:
+    needs: setup_java
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Run Prettier
+        uses: npx prettier --write "**/*.java"
+  pull_request:
+    needs: prettier
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: '🎉 code-style(prettier-java): update code style with prettier-java'
+          title: Prettier Java
+          body: |
+            Update code style with prettier-java
+          branch: prettier-java
+          delete-branch: true
+          labels: prettier-java
