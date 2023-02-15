@@ -15,8 +15,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node_version }}
-      - name: Install prettier java
-        run: npm install prettier-plugin-java
   setup_java:
     needs: setup_node
     runs-on: ubuntu-latest
@@ -32,6 +30,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Install prettier java
+        run: npm install prettier-plugin-java
       - name: Run Prettier
         run: npx prettier --write "**/*.java"
   pull_request:
