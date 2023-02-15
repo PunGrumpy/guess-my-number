@@ -25,14 +25,17 @@
 
 ## TODOs
 
-- [x] Readme
-- [x] License
-- [ ] GitHub actions
-- [ ] Source code
-  - [ ] Main
-  - [ ] Inputs
+- [x] Inputs
+  - [x] Add inputs and make sure they respond to events on keyboard and mouse
+  - [x] Move the rectangle with our new inputs
+- [x] Game Loop
+  - [x] Repaint game loop
+  - [x] Make a fps counter
+  - [x] Add visuals
 
 ## TIPs
+
+### Git
 
 ```bash
 # How to clone a repository
@@ -58,4 +61,12 @@ git push origin <branch-name>
 # 5. Click on the "Create pull request" button
 # 6. Add a title and description to your pull request
 # 7. Click on the "Create pull request" button
+```
+
+### Java
+
+```bash
+# How to run the game for development
+javac -d ./src/bin **/*.java
+java --enable-preview -XX:+ShowCodeDetailsInExceptionMessages -cp ./src/bin main.MainClass
 ```
