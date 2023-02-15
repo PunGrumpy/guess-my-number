@@ -8,9 +8,11 @@ public class GameWindow {
   public GameWindow(GamePanel gamePanel) {
     jframe = new JFrame("Java Game");
 
-    jframe.setSize(500, 500);
     jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     jframe.add(gamePanel);
+    // jframe.setLocationRelativeTo(null); // Centers the window
+    jframe.setResizable(false); // Prevents the window from being resized
+    jframe.pack(); // Adjusts the size of the window to fit the content
     jframe.setVisible(true);
   }
 }

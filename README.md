@@ -32,6 +32,7 @@
   - [x] Repaint game loop
   - [x] Make a fps counter
   - [x] Add visuals
+- [x] Images
 
 ## TIPs
 
