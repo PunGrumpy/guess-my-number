@@ -36,7 +36,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Run Prettier
-        uses: npx prettier --write "**/*.java"
+        run: npx prettier --write "**/*.java"
   pull_request:
     needs: prettier
     runs-on: ubuntu-latest
