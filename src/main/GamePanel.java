@@ -20,18 +20,29 @@ import inputs.MouseInputs;
 public class GamePanel extends JPanel {
   private MouseInputs mouseInputs;
   private float xDelta = 100, yDelta = 100;
-  private BufferedImage image; 
-  private final String imageFileName = "assets/players.png";
+  private BufferedImage image, subImage; 
+  private BufferedImage[] runningAnimations;
+  private int animationTick, animationIndex, animationSpeed = 12; // Animation speed is 30 ticks per animation
+  private final String imageFileName = "assets/players_knight.png";
   
   public GamePanel() {
     mouseInputs = new MouseInputs(this);
 
     importImage();
+    loadAnimations();
     
     setPanelSize();
     addKeyListener(new KeyboardInputs(this));
     addMouseListener(mouseInputs);
     addMouseMotionListener(mouseInputs);
+  }
+
+  private void loadAnimations() {    
+    runningAnimations = new BufferedImage[10];
+
+    for(int i = 0; i < runningAnimations.length; i++) {
+      runningAnimations[i] = image.getSubimage(i * 120, 0, 72, 80);
+    }
   }
 
   private void importImage() {
@@ -63,8 +74,22 @@ public class GamePanel extends JPanel {
     this.yDelta = y;
   }
 
+  private void updateAnimationTick() {
+    animationTick++;
+    if(animationTick >= animationSpeed) {
+      animationTick = 0;
+      animationIndex++;
+      if(animationIndex >= runningAnimations.length) {
+        animationIndex = 0;
+      }
+    }
+  }
+
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
-    g.drawImage(image, 0, 0, null); // if in image more than 1 use image.getSubimage(x, y, width, height)
+
+    updateAnimationTick();
+    
+    g.drawImage(runningAnimations[animationIndex], (int)xDelta, (int)yDelta, null);
   }
 } 
