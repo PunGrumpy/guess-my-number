@@ -71,6 +71,6 @@ git push origin <branch-name>
 
 ```bash
 # How to run the game for development
-javac -d ./src/bin **/*.java
+javac -d ./bin **/*.java
 java --enable-preview -XX:+ShowCodeDetailsInExceptionMessages -cp ./src/bin main.MainClass
 ```
