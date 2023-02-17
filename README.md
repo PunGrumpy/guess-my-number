@@ -33,6 +33,9 @@
   - [x] Make a fps counter
   - [x] Add visuals
 - [x] Images
+  - [x] Add images
+  - [x] Add images to the game
+  - [x] Add animations
 
 ## TIPs
 
