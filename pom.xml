@@ -28,6 +28,8 @@
     <properties>
         <maven.complier.source>3.10.0</maven.complier.source>
         <maven.complier.target>3.10.0</maven.complier.target>
+        <sonar.organization>pungrumpy</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
     <build>
