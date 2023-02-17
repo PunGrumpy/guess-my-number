@@ -4,7 +4,15 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <name>Game with Java</name>
     <description>Made game with java language 🎮</description>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
     <groupId>org.javaGame</groupId>
     <artifactId>java-game</artifactId>
     <packaging>jar</packaging>
