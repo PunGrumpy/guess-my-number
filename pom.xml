@@ -30,6 +30,7 @@
         <maven.complier.target>3.10.0</maven.complier.target>
         <sonar.organization>pungrumpy</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
     </properties>
 
     <build>
