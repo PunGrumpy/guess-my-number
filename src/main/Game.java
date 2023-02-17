@@ -1,6 +1,7 @@
 package main;
 
 public class Game implements Runnable {
+
   private GameWindow gameWindow;
   private GamePanel gamePanel;
   private Thread gameThread;
@@ -18,27 +19,26 @@ public class Game implements Runnable {
     gameThread.start();
   }
 
-  @Override
-	public void run() {
-		double timePerFrame = 1_000_000_000.0 / FPS_SET; // nanoseconds
-		long lastFrame = System.nanoTime();
-		long now = System.nanoTime();
-		int frames = 0; // FPS counter
-		long lastCheck = System.currentTimeMillis(); // Last time to check FPS
+  public void run() {
+    double timePerFrame = 1_000_000_000.0 / FPS_SET; // nanoseconds
+    long lastFrame = System.nanoTime();
+    long now = System.nanoTime();
+    int frames = 0; // FPS counter
+    long lastCheck = System.currentTimeMillis(); // Last time to check FPS
 
-		while (true) {
-			now = System.nanoTime();
-			if (now - lastFrame >= timePerFrame) {
-				gamePanel.repaint();
-				lastFrame = now;
-				frames++;
-			}
+    while (true) {
+      now = System.nanoTime();
+      if (now - lastFrame >= timePerFrame) {
+        gamePanel.repaint();
+        lastFrame = now;
+        frames++;
+      }
 
-			if (System.currentTimeMillis() - lastCheck >= 1000) {
-				lastCheck = System.currentTimeMillis();
-				System.out.printf("FPS: %d%n", frames);
-				frames = 0;
-			}
+      if (System.currentTimeMillis() - lastCheck >= 1000) {
+        lastCheck = System.currentTimeMillis();
+        System.out.printf("FPS: %d%n", frames);
+        frames = 0;
+      }
     }
-	}
+  }
 }
