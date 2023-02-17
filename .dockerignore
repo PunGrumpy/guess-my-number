@@ -13,6 +13,8 @@
 
 # Maven
 target/
+./mvnw
+mvn*
 
 # Eclipse
 .classpath
