@@ -74,3 +74,11 @@ git push origin <branch-name>
 javac -d ./bin **/*.java
 java --enable-preview -XX:+ShowCodeDetailsInExceptionMessages -cp ./src/bin main.MainClass
 ```
+
+### Maven
+
+```bash
+# How to build jar file
+mvn compile
+mvn clean package
+```
