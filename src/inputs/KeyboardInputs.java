@@ -13,14 +13,17 @@ public class KeyboardInputs implements KeyListener {
     this.gamePanel = gamePanel;
   }
 
+  @Override
   public void keyTyped(KeyEvent e) {
     // When a key is typed
   }
 
+  @Override
   public void keyReleased(KeyEvent e) {
     // When a key is released
   }
 
+  @Override
   public void keyPressed(KeyEvent e) {
     switch (e.getKeyCode()) {
       case KeyEvent.VK_W:
