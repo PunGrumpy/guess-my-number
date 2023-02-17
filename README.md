@@ -1,8 +1,7 @@
 # Java Game
 
 ![MIT License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)
-![Java](https://img.shields.io/badge/Java-19.3.1-ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
-![CodeFactor Grade](https://www.codefactor.io/repository/github/pungrumpy/java-game/badge?style=for-the-badge)
+![Java](https://img.shields.io/badge/Java-19.0.2-ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 ![GitHub last commit](https://img.shields.io/github/last-commit/PunGrumpy/java-game?style=for-the-badge)
 ![KMITL](https://img.shields.io/badge/KMITL-Computer%20Science-f04e25.svg?style=for-the-badge&logo=kmitl&logoColor=white)
 
