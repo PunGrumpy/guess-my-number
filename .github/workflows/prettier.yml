@@ -40,7 +40,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Check code is changed
+        id: check_code
+        run: |
+          if [[ -z $(git status --porcelain) ]]; then
+            echo "::set-output name=changed::false"
+          else
+            echo "::set-output name=changed::true"
+          fi
       - name: Create Pull Request
+        id: cpr
+        if: steps.check_code.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -51,3 +61,8 @@ jobs:
           branch: prettier-java
           delete-branch: true
           labels: prettier-java
+      - name: Check outputs
+        if: ${{ steps.cpr.outputs.pull-request-number }}
+        run: |
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
