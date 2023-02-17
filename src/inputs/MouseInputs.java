@@ -13,38 +13,31 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
     this.gamePanel = gamePanel;
   }
 
-  @Override
   public void mouseDragged(MouseEvent e) {
     // When the mouse is dragged
   }
 
-  @Override
   public void mouseMoved(MouseEvent e) {
     // When the mouse is moved
     gamePanel.setRectPos(e.getX(), e.getY());
   }
 
-  @Override
   public void mouseClicked(MouseEvent e) {
     // When the mouse is clicked
   }
 
-  @Override
   public void mousePressed(MouseEvent e) {
     // When the mouse is pressed
   }
 
-  @Override
   public void mouseReleased(MouseEvent e) {
     // When the mouse is released
   }
 
-  @Override
   public void mouseEntered(MouseEvent e) {
     // When the mouse enters the window
   }
 
-  @Override
   public void mouseExited(MouseEvent e) {
     // When the mouse exits the window
   }
