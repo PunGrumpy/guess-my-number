@@ -8,7 +8,6 @@ import javax.imageio.ImageIO;
 public class Image {
     private String character, action;
     private int amount = 10;
-    private String imageFileName;
     private BufferedImage image;
     private BufferedImage[] animations;
     
@@ -19,7 +18,8 @@ public class Image {
     }
 
     private String getPath() {
-        return imageFileName = "assets/" + character + "_" + action + ".png";
+        String imageFileName = "assets/" + character + "_" + action + ".png";
+        return imageFileName;
     }
 
     private void importImage() {
