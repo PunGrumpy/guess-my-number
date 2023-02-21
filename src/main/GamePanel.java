@@ -2,6 +2,7 @@ package main;
 
 import inputs.KeyboardInputs;
 import inputs.MouseInputs;
+import character.Image;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -17,15 +18,12 @@ public class GamePanel extends JPanel {
 
   private MouseInputs mouseInputs;
   private float xDelta = 100, yDelta = 100;
-  private BufferedImage image, subImage;
-  private BufferedImage[] runningAnimations;
+  private BufferedImage[] CharacterAnimation;
   private int animationTick, animationIndex, animationSpeed = 12; // Animation speed is 30 ticks per animation
-  private final String imageFileName = "assets/players_knight.png";
 
   public GamePanel() {
     mouseInputs = new MouseInputs(this);
 
-    importImage();
     loadAnimations();
 
     setPanelSize();
@@ -35,20 +33,8 @@ public class GamePanel extends JPanel {
   }
 
   private void loadAnimations() {
-    runningAnimations = new BufferedImage[10];
-
-    for (int i = 0; i < runningAnimations.length; i++) {
-      runningAnimations[i] = image.getSubimage(i * 120, 0, 72, 80);
-    }
-  }
-
-  private void importImage() {
-    try {
-      File file = new File(imageFileName);
-      image = ImageIO.read(file);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    Image image = new Image("running", "players_knight", 10);
+    CharacterAnimation = image.getAnimations();
   }
 
   private void setPanelSize() {
@@ -76,7 +62,7 @@ public class GamePanel extends JPanel {
     if (animationTick >= animationSpeed) {
       animationTick = 0;
       animationIndex++;
-      if (animationIndex >= runningAnimations.length) {
+      if (animationIndex >= CharacterAnimation.length) {
         animationIndex = 0;
       }
     }
@@ -88,7 +74,7 @@ public class GamePanel extends JPanel {
     updateAnimationTick();
 
     g.drawImage(
-      runningAnimations[animationIndex],
+      CharacterAnimation[animationIndex],
       (int) xDelta,
       (int) yDelta,
       null
