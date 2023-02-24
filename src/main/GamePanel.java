@@ -12,8 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
-import utility.RandomNumber;
 import utility.Database;
+import utility.RandomNumber;
 
 class ColorScheme {
 
