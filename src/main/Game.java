@@ -1,44 +1,24 @@
 package main;
 
-public class Game implements Runnable {
+import java.awt.Dimension;
+import javax.swing.JFrame;
 
-  private GameWindow gameWindow;
-  private GamePanel gamePanel;
-  private Thread gameThread;
-  private final int FPS_SET = 120;
+public class Game extends JFrame {
 
+  protected JFrame jframe;
+  private Dimension screenSize = new Dimension(700, 600);
+  
   public Game() {
-    gamePanel = new GamePanel();
-    gameWindow = new GameWindow(gamePanel);
-    gamePanel.requestFocus();
-    startGameLoop();
-  }
-
-  private void startGameLoop() {
-    gameThread = new Thread(this);
-    gameThread.start();
-  }
-
-  public void run() {
-    double timePerFrame = 1_000_000_000.0 / FPS_SET; // nanoseconds
-    long lastFrame = System.nanoTime();
-    long now = System.nanoTime();
-    int frames = 0; // FPS counter
-    long lastCheck = System.currentTimeMillis(); // Last time to check FPS
-
-    while (true) {
-      now = System.nanoTime();
-      if (now - lastFrame >= timePerFrame) {
-        gamePanel.repaint();
-        lastFrame = now;
-        frames++;
-      }
-
-      if (System.currentTimeMillis() - lastCheck >= 1000) {
-        lastCheck = System.currentTimeMillis();
-        System.out.printf("FPS: %d%n", frames);
-        frames = 0;
-      }
-    }
+    jframe = new JFrame("Java Game");
+    jframe.setTitle("Guess My Number");
+    jframe.setPreferredSize(screenSize);
+    jframe.setMinimumSize(screenSize);
+    jframe.setMaximumSize(screenSize);
+    jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    jframe.add(new GamePanel(this));
+    jframe.setAlwaysOnTop(true);
+    jframe.setResizable(false); // Prevents the window from being resized
+    jframe.pack(); // Adjusts the size of the window to fit the content
+    jframe.setVisible(true);
   }
 }
