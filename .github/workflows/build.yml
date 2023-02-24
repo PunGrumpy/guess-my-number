@@ -12,7 +12,6 @@ env:
 
 jobs:
   setup_java:
-    if: github.commits[0].message == '#release'
     name: Setup Java
     runs-on: ubuntu-latest
     steps:
