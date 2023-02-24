@@ -40,13 +40,13 @@ jobs:
         id: check_code
         run: |
           if [[ -z $(git status --porcelain) ]]; then
-            echo true >> $env.IS_CHANGED
+            $env.IS_CHANGED = true
           else
-            echo false >> $env.IS_CHANGED
+            $env.IS_CHANGED = false
           fi
       - name: Create Pull Request
         id: cpr
-        if: ${{ env.IS_CHANGED == true }}
+        if: ${{ $env.IS_CHANGED == true }}
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
