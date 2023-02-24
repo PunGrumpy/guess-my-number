@@ -12,25 +12,26 @@ env:
 
 jobs:
   update_version:
-    name: Update version
+    name: Update version # 1.0.0 -> 1.0.1 -> 1.0.2 -> ...
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Update version
         run: |
+          echo "VERSION=$(echo $VERSION | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g')" >> $GITHUB_ENV
+      - name: Update pom.xml
+        run: |
           sed -i "s/<version>.*<\/version>/<version>${{ env.VERSION }}<\/version>/g" pom.xml
-          sed -i "s/VERSION = \".*\"/VERSION = \"${{ env.VERSION }}\"/g" src/main/java/com/github/robindevilliers/guessmynumber/Version.java
-      - name: Commit changes
+      - name: Commit version
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add pom.xml src/main/java/com/github/robindevilliers/guessmynumber/Version.java
+          git config --local user.name "GitHub Actions"
+          git add pom.xml
           git commit -m "Update version to ${{ env.VERSION }}"
-          git push origin HEAD:${{ github.ref }}
+          git push origin HEAD
   setup_java:
     name: Setup Java
-    needs: update_version
     runs-on: ubuntu-latest
     steps:
       - name: Set up Java 17
