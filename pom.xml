@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <name>Guess My Number</name>
-    <description>Made game with java language 🎮</description>
+    <description>Guess the mystery number 🔮</description>
     <licenses>
         <license>
             <name>MIT License</name>
@@ -14,7 +14,7 @@
         </license>
     </licenses>
     <groupId>org.javaGame</groupId>
-    <artifactId>java-game</artifactId>
+    <artifactId>guess-my-number</artifactId>
     <packaging>jar</packaging>
     <version>1.0.0</version>
 
@@ -69,8 +69,8 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.9</source>
+                    <target>1.9</target>
                 </configuration>
             </plugin>
             <plugin>
