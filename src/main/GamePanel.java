@@ -16,13 +16,13 @@ import utility.RandomNumber;
 
 class ColorScheme {
 
-  public Color red = new Color(255, 0, 0);
-  public Color green = new Color(0, 255, 0);
-  public Color white = new Color(250, 250, 250);
-  public Color indigo = new Color(64, 66, 88); // rgb(64, 66, 88)
-  public Color blueGray = new Color(71, 78, 104); // rgb(71, 78, 104)
-  public Color ligthBlueGray = new Color(80, 87, 122); // rgb(80, 87, 122)
-  public Color brigthBlueGray = new Color(107, 114, 142); // rgb(107, 114, 142)
+  protected Color red = new Color(255, 0, 0);
+  protected Color green = new Color(0, 255, 0);
+  protected Color white = new Color(250, 250, 250);
+  protected Color indigo = new Color(64, 66, 88); // rgb(64, 66, 88)
+  protected Color blueGray = new Color(71, 78, 104); // rgb(71, 78, 104)
+  protected Color ligthBlueGray = new Color(80, 87, 122); // rgb(80, 87, 122)
+  protected Color brigthBlueGray = new Color(107, 114, 142); // rgb(107, 114, 142)
 }
 
 public class GamePanel extends JPanel {
