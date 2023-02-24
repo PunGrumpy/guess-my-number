@@ -36,12 +36,6 @@ jobs:
         run: npm install prettier-plugin-java
       - name: Run Prettier
         run: npx prettier --write "**/*.java"
-  pull_request:
-    needs: prettier
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
       - name: Check code is changed
         id: check_code
         run: |
