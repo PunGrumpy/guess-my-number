@@ -1,14 +1,14 @@
 package utility;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 public class RandomNumber {
-
-  private Random random;
+  
   private int range = 50;
+  private SecureRandom random;
 
   public RandomNumber() {
-    random = new Random();
+    random = new SecureRandom();
   }
 
   public int GetRandomNumber() {
