@@ -51,8 +51,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./target/guess-my-number-1.0.0.jar
-          asset_name: guess-my-number-1.0.0.jar
+          asset_path: ./target/guess-my-number-${{ env.VERSION }}.jar
+          asset_name: guess-my-number-${{ env.VERSION }}.jar
           asset_content_type: application/java-archive
       - name: Output
         run: |
