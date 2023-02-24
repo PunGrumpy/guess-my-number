@@ -1,7 +1,7 @@
 name: Prettier Java
 on: [push, pull_request]
 env:
-  IS_CHANGED: false
+  IS_CHANGED: 'false'
 jobs:
   setup_node:
     name: unit tests (node ${{ matrix.node_version }})
@@ -46,13 +46,13 @@ jobs:
         id: check_code
         run: |
           if [[ -z $(git status --porcelain) ]]; then
-            echo true >> $env.IS_CHANGED
+            echo "true" >> $env.IS_CHANGED
           else
-            echo false >> env.IS_CHANGED
+            echo "false" >> $env.IS_CHANGED
           fi
       - name: Create Pull Request
         id: cpr
-        if: ${{ env.IS_CHANGED }} == 'true'
+        if: ${{ env.IS_CHANGED }} == "true"
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
