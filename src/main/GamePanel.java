@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import utility.RandomNumber;
+import utility.Database;
 
 class ColorScheme {
 
@@ -27,19 +28,25 @@ class ColorScheme {
 
 public class GamePanel extends JPanel {
 
+  private JFrame jframe;
+  private Database database;
   private RandomNumber randomNumber;
   private ColorScheme colorScheme;
-  private JFrame jframe;
 
-  private int SCORE = 0;
-  private int HIGH_SCORE = 0;
+  private int SCORE, HIGH_SCORE;
   private int UNKNOW_NUMBER;
 
   public GamePanel(Game game) {
     jframe = game.jframe;
+    database = new Database();
     colorScheme = new ColorScheme();
     randomNumber = new RandomNumber();
     UNKNOW_NUMBER = randomNumber.GET_RANDOM_NUMBER();
+
+    System.out.println("Unknow number: " + UNKNOW_NUMBER);
+
+    SCORE = database.showScore();
+    HIGH_SCORE = database.showHighScore();
 
     BoxLayout boxlayout = new BoxLayout(this, BoxLayout.Y_AXIS);
     this.setLayout(boxlayout);
@@ -54,14 +61,12 @@ public class GamePanel extends JPanel {
 
   private void Render() {
     Label label_0 = new Label("Random Number Between 1 and 50");
-    // label_0.setBackground(colorScheme.indigo);
     label_0.setForeground(colorScheme.white);
     label_0.setBounds(100, 40, 800, 20);
     label_0.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     jframe.add(label_0);
 
     Label label_1 = new Label("Enter your guess: ");
-    // label_1.setBackground(colorScheme.indigo);
     label_1.setForeground(colorScheme.white);
     label_1.setBounds(170, 100, 230, 30);
     label_1.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
@@ -90,7 +95,7 @@ public class GamePanel extends JPanel {
     text_2.setBounds(320, 220, 150, 30);
     text_2.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     jframe.add(text_2);
-    text_2.setText(" -");
+    text_2.setText("-");
 
     Label label_3 = new Label("Score: ");
     label_3.setForeground(colorScheme.white);
@@ -103,7 +108,7 @@ public class GamePanel extends JPanel {
     text_3.setBounds(320, 260, 150, 30);
     text_3.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     jframe.add(text_3);
-    text_3.setText(" -");
+    text_3.setText(SCORE + "");
 
     Label label_4 = new Label("High Score: ");
     label_4.setForeground(colorScheme.white);
@@ -116,7 +121,7 @@ public class GamePanel extends JPanel {
     text_4.setBounds(320, 300, 150, 30);
     text_4.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     jframe.add(text_4);
-    text_4.setText(" 0");
+    text_4.setText(HIGH_SCORE + "");
 
     JButton button_2 = new JButton("Reset");
     button_2.setBounds(290, 370, 100, 50);
@@ -151,11 +156,15 @@ public class GamePanel extends JPanel {
             text_2.setText("Correct");
             text_2.setForeground(colorScheme.green);
             SCORE++;
+            database.setScore(SCORE);
+            database.saveScore();
             UNKNOW_NUMBER = randomNumber.GET_RANDOM_NUMBER();
             text_2.setForeground(colorScheme.white);
             text_3.setText(String.valueOf(SCORE));
             if (SCORE > HIGH_SCORE) {
               HIGH_SCORE = SCORE;
+              database.setHighScore(HIGH_SCORE);
+              database.saveHighScore();
               text_4.setText(String.valueOf(HIGH_SCORE));
             }
           }
@@ -167,10 +176,10 @@ public class GamePanel extends JPanel {
       new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-          text_3.setText(" -");
+          text_3.setText("-");
           SCORE = 0;
           UNKNOW_NUMBER = randomNumber.GET_RANDOM_NUMBER();
-          text_2.setText(" -");
+          text_2.setText("-");
           text_1.setText("");
         }
       }
