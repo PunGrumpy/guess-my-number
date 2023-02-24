@@ -39,7 +39,7 @@ public class GamePanel extends JPanel {
     jframe = game.jframe;
     colorScheme = new ColorScheme();
     randomNumber = new RandomNumber();
-    UNKNOW_NUMBER = randomNumber.Get_Random_Number();
+    UNKNOW_NUMBER = randomNumber.GET_RANDOM_NUMBER();
 
     BoxLayout boxlayout = new BoxLayout(this, BoxLayout.Y_AXIS);
     this.setLayout(boxlayout);
@@ -151,7 +151,7 @@ public class GamePanel extends JPanel {
             text_2.setText("Correct");
             text_2.setForeground(colorScheme.green);
             SCORE++;
-            UNKNOW_NUMBER = randomNumber.Get_Random_Number();
+            UNKNOW_NUMBER = randomNumber.GET_RANDOM_NUMBER();
             text_2.setForeground(colorScheme.white);
             text_3.setText(String.valueOf(SCORE));
             if (SCORE > HIGH_SCORE) {
@@ -169,7 +169,7 @@ public class GamePanel extends JPanel {
         public void actionPerformed(ActionEvent e) {
           text_3.setText(" -");
           SCORE = 0;
-          UNKNOW_NUMBER = randomNumber.Get_Random_Number();
+          UNKNOW_NUMBER = randomNumber.GET_RANDOM_NUMBER();
           text_2.setText(" -");
           text_1.setText("");
         }
