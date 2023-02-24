@@ -11,7 +11,7 @@ public class RandomNumber {
     random = new SecureRandom();
   }
 
-  public int GetRandomNumber() {
+  public int Get_Random_Number() {
     return random.nextInt(range) + 1;
   }
 }
