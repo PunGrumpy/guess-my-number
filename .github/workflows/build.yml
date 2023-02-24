@@ -30,7 +30,7 @@ jobs:
           git checkout -b ${{ env.VERSION }}
           git add pom.xml
           git commit -m "Update version to ${{ env.VERSION }}"
-          git push origin HEAD
+          git push origin ${{ env.VERSION }}
   setup_java:
     name: Setup Java
     needs: update_version
