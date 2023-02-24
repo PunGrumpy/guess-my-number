@@ -7,7 +7,7 @@ public class Game extends JFrame {
 
   protected JFrame jframe;
   private Dimension screenSize = new Dimension(700, 600);
-  
+
   public Game() {
     jframe = new JFrame("Java Game");
     jframe.setTitle("Guess My Number");

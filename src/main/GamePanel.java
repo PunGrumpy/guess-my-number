@@ -6,19 +6,19 @@ import java.awt.Label;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JOptionPane;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import utility.RandomNumber;
 
 class ColorScheme {
+
   public Color red = new Color(255, 0, 0);
   public Color green = new Color(0, 255, 0);
-  public Color white = new Color(250, 250, 250); 
+  public Color white = new Color(250, 250, 250);
   public Color indigo = new Color(64, 66, 88); // rgb(64, 66, 88)
   public Color blueGray = new Color(71, 78, 104); // rgb(71, 78, 104)
   public Color ligthBlueGray = new Color(80, 87, 122); // rgb(80, 87, 122)
@@ -48,7 +48,7 @@ public class GamePanel extends JPanel {
     jframe.getContentPane().setBackground(colorScheme.indigo);
 
     Render();
-    
+
     jframe.setLocationRelativeTo(null);
   }
 
@@ -127,19 +127,22 @@ public class GamePanel extends JPanel {
     JButton button_3 = new JButton("Exit");
     button_3.setBounds(290, 430, 100, 50);
     button_3.setBorder(new LineBorder(colorScheme.blueGray, 2));
-    button_3.setFont(new Font(Font.DIALOG, Font.BOLD, 20)); 
+    button_3.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     jframe.add(button_3);
 
     button_1.addActionListener(
       new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-          if(Integer.parseInt(text_1.getText()) > 50 || Integer.parseInt(text_1.getText()) < 1) {
+          if (
+            Integer.parseInt(text_1.getText()) > 50 ||
+            Integer.parseInt(text_1.getText()) < 1
+          ) {
             text_2.setText("Invalid");
             text_2.setForeground(colorScheme.red);
             return;
           }
-          
+
           if (Integer.parseInt(text_1.getText()) > UNKNOW_NUMBER) {
             text_2.setText("Too High");
           } else if (Integer.parseInt(text_1.getText()) < UNKNOW_NUMBER) {
@@ -177,7 +180,12 @@ public class GamePanel extends JPanel {
       new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-          int exit = javax.swing.JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?", "Exit", JOptionPane.YES_NO_OPTION);
+          int exit = javax.swing.JOptionPane.showConfirmDialog(
+            null,
+            "Are you sure you want to exit?",
+            "Exit",
+            JOptionPane.YES_NO_OPTION
+          );
           if (exit == javax.swing.JOptionPane.YES_OPTION) {
             System.exit(0);
           }

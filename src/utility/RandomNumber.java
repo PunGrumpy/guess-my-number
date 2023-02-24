@@ -3,7 +3,7 @@ package utility;
 import java.security.SecureRandom;
 
 public class RandomNumber {
-  
+
   private int range = 50;
   private SecureRandom random;
 
