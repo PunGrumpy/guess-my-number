@@ -23,20 +23,6 @@
 └─── README.md
 ```
 
-## TODOs
-
-- [x] Inputs
-  - [x] Add inputs and make sure they respond to events on keyboard and mouse
-  - [x] Move the rectangle with our new inputs
-- [x] Game Loop
-  - [x] Repaint game loop
-  - [x] Make a fps counter
-  - [x] Add visuals
-- [x] Images
-  - [x] Add images
-  - [x] Add images to the game
-  - [x] Add animations
-
 ## TIPs
 
 ### Git
