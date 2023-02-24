@@ -16,7 +16,7 @@
 │   └─── workflows
 ├─── src
 │   └─── main
-│   └─── inputs
+│   └─── utility
 ├─── .gitignore
 ├─── pom.xml
 ├─── LICENSE
