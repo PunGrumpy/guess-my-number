@@ -12,25 +12,48 @@ env:
 
 jobs:
   update_version:
-    name: Update version # 1.0.0 -> 1.0.1 -> 1.0.2 -> ...
+    name: Update version # 1.0.0 -> 1.0.1 -> 1.0.2 -> ... if 1.0.9 -> 1.0.10 and so on
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Update version
-        run: |
-          echo "VERSION=$(echo $VERSION | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g')" >> $GITHUB_ENV
-      - name: Update pom.xml
-        run: |
-          sed -i "s/<version>.*<\/version>/<version>${{ env.VERSION }}<\/version>/g" pom.xml
-      - name: Commit version
-        run: |
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "GitHub Actions"
-          git checkout -b ${{ env.VERSION }}
-          git add pom.xml
-          git commit -m "Update version to ${{ env.VERSION }}"
-          git push origin ${{ env.VERSION }}
+        id: update_version
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data: releases } = await github.repos.listReleases({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+            const latestRelease = releases[0];
+            const latestVersion = latestRelease.tag_name;
+            const version = latestVersion.split('.');
+            const major = version[0];
+            const minor = version[1];
+            const patch = version[2];
+            const newPatch = parseInt(patch) + 1;
+            const newVersion = `${major}.${minor}.${newPatch}`;
+            core.setOutput('version', newVersion);
+            core.setOutput('name', '${{ env.NAME }}');
+            core.setOutput('tag_name', newVersion);
+            core.setOutput('release_name', 'Release ${{ env.NAME }}@' + newVersion);
+            core.setOutput('draft', false);
+            core.setOutput('prerelease', false);
+            console.log('New version: ' + newVersion);
+            console.log('New tag name: ' + newVersion);
+            console.log('New release name: ' + 'Release ${{ env.NAME }}@' + newVersion);
+            console.log('New draft: ' + false);
+            console.log('New prerelease: ' + false);
+            await github.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: newVersion,
+              name: 'Release ${{ env.NAME }}@' + newVersion,
+              draft: false,
+              prerelease: false,
+            });
   setup_java:
     name: Setup Java
     needs: update_version
