@@ -59,3 +59,7 @@ jobs:
           echo "Upload URL: ${{ steps.create_release.outputs.upload_url }}"
           echo "Upload Asset ID: ${{ steps.upload-release-asset.outputs.asset_id }}"
           echo "Release ID: ${{ steps.create_release.outputs.id }}"
+      - name: Update version # 1.0.0 -> 1.0.1 (for next release)
+        run: |
+          echo "VERSION=$(echo ${{ env.VERSION }} | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g')" >> $GITHUB_ENV
+          echo "Version updated to ${{ env.VERSION }}"
