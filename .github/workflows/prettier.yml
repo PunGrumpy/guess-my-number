@@ -46,9 +46,9 @@ jobs:
         id: check_code
         run: |
           if [[ -z $(git status --porcelain) ]]; then
-            echo "true" >> $env.IS_CHANGED
+            echo true >> $env.IS_CHANGED
           else
-            echo "false" >> $env.IS_CHANGED
+            echo false >> $env.IS_CHANGED
           fi
       - name: Create Pull Request
         id: cpr
