@@ -54,3 +54,8 @@ jobs:
           asset_path: ./target/guess-my-number-1.0.0.jar
           asset_name: guess-my-number-1.0.0.jar
           asset_content_type: application/java-archive
+      - name: Output
+        run: |
+          echo "Upload URL: ${{ steps.create_release.outputs.upload_url }}"
+          echo "Upload Asset ID: ${{ steps.upload-release-asset.outputs.asset_id }}"
+          echo "Release ID: ${{ steps.create_release.outputs.id }}"
