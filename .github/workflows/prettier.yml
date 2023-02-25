@@ -1,5 +1,8 @@
 name: Prettier Java
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
 jobs:
   setup_node:
     name: unit tests (node ${{ matrix.node_version }})
@@ -23,7 +26,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: 17
-          distribution: 'temurin'
+          distribution: "temurin"
   prettier:
     needs: setup_java
     runs-on: ubuntu-latest
@@ -50,7 +53,7 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: '🎉 code-style(prettier-java): update code style with prettier-java'
+          commit-message: "🎉 code-style(prettier-java): update code style with prettier-java"
           title: Prettier Java
           body: |
             Update code style with prettier-java
