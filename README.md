@@ -32,7 +32,7 @@
 git clone https://github.com/PunGrumpy/java-game.git
 
 # How to create a new branch
-git checkout -b <branch-name>
+git checkout -b <branch-name> # recommended branch name: feat/<your-name>, bug/<your-name>, etc.
 
 # How to add a file to the staging area
 git add <file-name>
