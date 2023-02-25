@@ -32,8 +32,8 @@ public class GamePanel extends JPanel {
   private Database database;
   private RandomNumber randomNumber;
   private ColorScheme colorScheme;
- 
-  private int SCORE, HIGH_SCORE,GUESS_COUNT;
+
+  private int SCORE, HIGH_SCORE, GUESS_COUNT;
   private int UNKNOW_NUMBER;
 
   public GamePanel(Game game) {
@@ -110,8 +110,6 @@ public class GamePanel extends JPanel {
     jframe.add(text_GuessCount);
     text_GuessCount.setText("0");
 
-    
-
     Label label_3 = new Label("Score: ");
     label_3.setForeground(colorScheme.white);
     label_3.setBounds(230, 300, 90, 30);
@@ -177,16 +175,12 @@ public class GamePanel extends JPanel {
             text_2.setText("Correct");
             SCORE++;
             GUESS_COUNT++;
-            String GGtext="";
-            if(GUESS_COUNT <=3)
-              GGtext = " Lucky?";
-            else if(GUESS_COUNT <=6)
-              GGtext= " Pretty Good";
-            else if(GUESS_COUNT <=10)
-              GGtext = " Decent";
-            else
-              GGtext =" Skill issue?";
-            text_GuessCount.setText(String.valueOf(GUESS_COUNT)+GGtext);
+            String GGtext = "";
+            if (GUESS_COUNT <= 3) GGtext = " Lucky?"; else if (
+              GUESS_COUNT <= 6
+            ) GGtext = " Pretty Good"; else if (GUESS_COUNT <= 10) GGtext =
+              " Decent"; else GGtext = " Skill issue?";
+            text_GuessCount.setText(String.valueOf(GUESS_COUNT) + GGtext);
             text_1.setText("");
             GUESS_COUNT = 0;
             database.setScore(SCORE);
@@ -204,7 +198,7 @@ public class GamePanel extends JPanel {
       }
     );
 
-    button_2.addActionListener(//RESET BUTTON
+    button_2.addActionListener( //RESET BUTTON
       new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -220,7 +214,7 @@ public class GamePanel extends JPanel {
       }
     );
 
-    button_3.addActionListener(//EXIT BUTTON
+    button_3.addActionListener( //EXIT BUTTON
       new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
