@@ -32,8 +32,8 @@ public class GamePanel extends JPanel {
   private Database database;
   private RandomNumber randomNumber;
   private ColorScheme colorScheme;
-
-  private int SCORE, HIGH_SCORE;
+ 
+  private int SCORE, HIGH_SCORE,GUESS_COUNT;
   private int UNKNOW_NUMBER;
 
   public GamePanel(Game game) {
@@ -62,7 +62,7 @@ public class GamePanel extends JPanel {
   private void Render() {
     Label label_0 = new Label("Random Number Between 1 and 50");
     label_0.setForeground(colorScheme.white);
-    label_0.setBounds(100, 40, 800, 20);
+    label_0.setBounds(165, 40, 800, 20);
     label_0.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     jframe.add(label_0);
 
@@ -86,7 +86,7 @@ public class GamePanel extends JPanel {
 
     Label label_2 = new Label("Check: ");
     label_2.setForeground(colorScheme.white);
-    label_2.setBounds(210, 220, 100, 30);
+    label_2.setBounds(225, 220, 90, 30);
     label_2.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     jframe.add(label_2);
 
@@ -97,40 +97,55 @@ public class GamePanel extends JPanel {
     jframe.add(text_2);
     text_2.setText("-");
 
+    Label label_GuessCount = new Label("Attempt: ");
+    label_GuessCount.setForeground(colorScheme.white);
+    label_GuessCount.setBounds(212, 260, 80, 30);
+    label_GuessCount.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
+    jframe.add(label_GuessCount);
+
+    TextField text_GuessCount = new TextField();
+    text_GuessCount.setBackground(colorScheme.brigthBlueGray);
+    text_GuessCount.setBounds(320, 260, 150, 30);
+    text_GuessCount.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
+    jframe.add(text_GuessCount);
+    text_GuessCount.setText("0");
+
+    
+
     Label label_3 = new Label("Score: ");
     label_3.setForeground(colorScheme.white);
-    label_3.setBounds(220, 260, 100, 30);
+    label_3.setBounds(230, 300, 90, 30);
     label_3.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     jframe.add(label_3);
 
     TextField text_3 = new TextField();
     text_3.setBackground(colorScheme.brigthBlueGray);
-    text_3.setBounds(320, 260, 150, 30);
+    text_3.setBounds(320, 300, 150, 30);
     text_3.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     jframe.add(text_3);
     text_3.setText(SCORE + "");
 
     Label label_4 = new Label("High Score: ");
     label_4.setForeground(colorScheme.white);
-    label_4.setBounds(170, 300, 130, 30);
+    label_4.setBounds(180, 340, 130, 30);
     label_4.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     jframe.add(label_4);
 
     TextField text_4 = new TextField();
     text_4.setBackground(colorScheme.brigthBlueGray);
-    text_4.setBounds(320, 300, 150, 30);
+    text_4.setBounds(320, 340, 150, 30);
     text_4.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     jframe.add(text_4);
     text_4.setText(HIGH_SCORE + "");
 
     JButton button_2 = new JButton("Reset");
-    button_2.setBounds(290, 370, 100, 50);
+    button_2.setBounds(290, 410, 100, 50);
     button_2.setBorder(new LineBorder(colorScheme.blueGray, 2));
     button_2.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     jframe.add(button_2);
 
     JButton button_3 = new JButton("Exit");
-    button_3.setBounds(290, 430, 100, 50);
+    button_3.setBounds(290, 470, 100, 50);
     button_3.setBorder(new LineBorder(colorScheme.blueGray, 2));
     button_3.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     jframe.add(button_3);
@@ -147,19 +162,36 @@ public class GamePanel extends JPanel {
             text_2.setForeground(colorScheme.red);
             return;
           }
-
           if (Integer.parseInt(text_1.getText()) > UNKNOW_NUMBER) {
             text_2.setText("Too High");
+            text_2.setForeground(colorScheme.red);
+            GUESS_COUNT++;
+            text_GuessCount.setText(String.valueOf(GUESS_COUNT));
           } else if (Integer.parseInt(text_1.getText()) < UNKNOW_NUMBER) {
             text_2.setText("Too Low");
+            text_2.setForeground(colorScheme.red);
+            GUESS_COUNT++;
+            text_GuessCount.setText(String.valueOf(GUESS_COUNT));
           } else {
-            text_2.setText("Correct");
             text_2.setForeground(colorScheme.green);
+            text_2.setText("Correct");
             SCORE++;
+            GUESS_COUNT++;
+            String GGtext="";
+            if(GUESS_COUNT <=3)
+              GGtext = " Lucky?";
+            else if(GUESS_COUNT <=6)
+              GGtext= " Pretty Good";
+            else if(GUESS_COUNT <=10)
+              GGtext = " Decent";
+            else
+              GGtext =" Skill issue?";
+            text_GuessCount.setText(String.valueOf(GUESS_COUNT)+GGtext);
+            text_1.setText("");
+            GUESS_COUNT = 0;
             database.setScore(SCORE);
             database.saveScore();
             UNKNOW_NUMBER = randomNumber.GET_RANDOM_NUMBER();
-            text_2.setForeground(colorScheme.white);
             text_3.setText(String.valueOf(SCORE));
             if (SCORE > HIGH_SCORE) {
               HIGH_SCORE = SCORE;
@@ -172,7 +204,7 @@ public class GamePanel extends JPanel {
       }
     );
 
-    button_2.addActionListener(
+    button_2.addActionListener(//RESET BUTTON
       new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -180,12 +212,15 @@ public class GamePanel extends JPanel {
           SCORE = 0;
           UNKNOW_NUMBER = randomNumber.GET_RANDOM_NUMBER();
           text_2.setText("-");
+          text_2.setForeground(colorScheme.white);
           text_1.setText("");
+          GUESS_COUNT = 0;
+          text_GuessCount.setText(String.valueOf(GUESS_COUNT));
         }
       }
     );
 
-    button_3.addActionListener(
+    button_3.addActionListener(//EXIT BUTTON
       new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
