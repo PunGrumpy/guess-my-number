@@ -30,17 +30,9 @@ jobs:
         run: mvn -B package --file pom.xml
       - name: Export file
         run: |
-          echo "export FILE_NAME=$(ls target/*.jar)" >> $GITHUB_ENV
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
+          ls -la target
+      - name: Download file
+        uses: actions/download-artifact@v2
         with:
-          name: artifact
-          path: ${{ env.FILE_NAME }}
-      - name: Upload to release
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{ env.FILE_NAME }}
-          asset_name: ${{ env.FILE_NAME }}
-          tag: ${{ github.ref }}
-          overwrite: true
+          name: target
+          path: target
