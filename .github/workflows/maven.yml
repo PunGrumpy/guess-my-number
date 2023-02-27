@@ -28,11 +28,28 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn -B package --file pom.xml
-      - name: Export file
+      - name: Show file
         run: |
           ls -la target
-      - name: Download file
-        uses: actions/download-artifact@v2
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
         with:
-          name: target
-          path: target
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./target/*.jar
+          asset_name: ${{ github.event.release.tag_name }}.jar
+          asset_content_type: application/java-archive
