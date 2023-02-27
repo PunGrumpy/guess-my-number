@@ -43,8 +43,6 @@ public class GamePanel extends JPanel {
     randomNumber = new RandomNumber();
     UNKNOW_NUMBER = randomNumber.GET_RANDOM_NUMBER();
 
-    System.out.println("Unknow number: " + UNKNOW_NUMBER);
-
     SCORE = database.showScore();
     HIGH_SCORE = database.showHighScore();
 
@@ -60,36 +58,42 @@ public class GamePanel extends JPanel {
   }
 
   private void Render() {
+    // Title
     Label label_0 = new Label("Random Number Between 1 and 50");
     label_0.setForeground(colorScheme.white);
-    label_0.setBounds(100, 40, 800, 20);
+    label_0.setBounds(160, 40, 800, 20);
     label_0.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     jframe.add(label_0);
 
+    // Label input
     Label label_1 = new Label("Enter your guess: ");
     label_1.setForeground(colorScheme.white);
     label_1.setBounds(170, 100, 230, 30);
     label_1.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     jframe.add(label_1);
 
+    // Field input
     TextField text_1 = new TextField();
     text_1.setBackground(colorScheme.brigthBlueGray);
     text_1.setBounds(400, 100, 80, 30);
     text_1.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     jframe.add(text_1);
 
+    // Button input
     JButton button_1 = new JButton("Guess");
     button_1.setBounds(290, 150, 100, 50);
     button_1.setBorder(new LineBorder(colorScheme.blueGray, 2));
     button_1.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     jframe.add(button_1);
 
+    // Button action
     Label label_2 = new Label("Check: ");
     label_2.setForeground(colorScheme.white);
     label_2.setBounds(210, 220, 100, 30);
     label_2.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     jframe.add(label_2);
 
+    // Check input
     TextField text_2 = new TextField();
     text_2.setBackground(colorScheme.brigthBlueGray);
     text_2.setBounds(320, 220, 150, 30);
@@ -97,12 +101,14 @@ public class GamePanel extends JPanel {
     jframe.add(text_2);
     text_2.setText("-");
 
+    // Score label
     Label label_3 = new Label("Score: ");
     label_3.setForeground(colorScheme.white);
     label_3.setBounds(220, 260, 100, 30);
     label_3.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     jframe.add(label_3);
 
+    // Highscore field
     TextField text_3 = new TextField();
     text_3.setBackground(colorScheme.brigthBlueGray);
     text_3.setBounds(320, 260, 150, 30);
@@ -110,12 +116,14 @@ public class GamePanel extends JPanel {
     jframe.add(text_3);
     text_3.setText(SCORE + "");
 
+    // Highscore label
     Label label_4 = new Label("High Score: ");
     label_4.setForeground(colorScheme.white);
     label_4.setBounds(170, 300, 130, 30);
     label_4.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     jframe.add(label_4);
 
+    // Highscore field
     TextField text_4 = new TextField();
     text_4.setBackground(colorScheme.brigthBlueGray);
     text_4.setBounds(320, 300, 150, 30);
@@ -123,12 +131,14 @@ public class GamePanel extends JPanel {
     jframe.add(text_4);
     text_4.setText(HIGH_SCORE + "");
 
+    // Reset button
     JButton button_2 = new JButton("Reset");
     button_2.setBounds(290, 370, 100, 50);
     button_2.setBorder(new LineBorder(colorScheme.blueGray, 2));
     button_2.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     jframe.add(button_2);
 
+    // Exit button
     JButton button_3 = new JButton("Exit");
     button_3.setBounds(290, 430, 100, 50);
     button_3.setBorder(new LineBorder(colorScheme.blueGray, 2));
