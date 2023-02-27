@@ -1,4 +1,4 @@
-name: Publish Java to Github Packages
+name: Build Package Java
 on:
   push:
     branches:
