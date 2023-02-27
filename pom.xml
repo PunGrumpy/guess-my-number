@@ -81,4 +81,12 @@
             </plugin>
         </plugins>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>GitHub</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/PunGrumpy/Guess-My-Number</url>
+        </repository>
+    </distributionManagement>
 </project>
