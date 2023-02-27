@@ -84,9 +84,9 @@
 
     <distributionManagement>
         <repository>
-            <id>GitHub</id>
+            <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/PunGrumpy/Guess-My-Number</url>
+            <url>https://maven.pkg.github.com/cvitaa11/java-spring-demo</url>
         </repository>
     </distributionManagement>
 </project>
