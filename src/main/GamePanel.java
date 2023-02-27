@@ -151,7 +151,7 @@ public class GamePanel extends JPanel {
     button_1.addActionListener(
       new ActionListener() {
         @Override
-        public void actionPerformed(ActionEvent e) {          
+        public void actionPerformed(ActionEvent e) {
           if (text_1.getText().equals("")) {
             text_2.setText("Invalid");
             text_2.setForeground(colorScheme.red);
@@ -166,10 +166,10 @@ public class GamePanel extends JPanel {
               );
               System.exit(0);
             }
-            
+
             return;
           }
-          
+
           if (
             Integer.parseInt(text_1.getText()) > 50 ||
             Integer.parseInt(text_1.getText()) < 1
