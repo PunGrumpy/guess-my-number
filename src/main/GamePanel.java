@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import utility.Database;
+import utility.Music;
 import utility.RandomNumber;
 
 class ColorScheme {
@@ -32,9 +33,11 @@ public class GamePanel extends JPanel {
   private Database database;
   private RandomNumber randomNumber;
   private ColorScheme colorScheme;
+  private Music music = new Music();
 
   private int SCORE, HIGH_SCORE;
   private int UNKNOW_NUMBER;
+  private int EMPTY_COUNTER = 0;
 
   public GamePanel(Game game) {
     jframe = game.jframe;
@@ -148,7 +151,25 @@ public class GamePanel extends JPanel {
     button_1.addActionListener(
       new ActionListener() {
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent e) {          
+          if (text_1.getText().equals("")) {
+            text_2.setText("Invalid");
+            text_2.setForeground(colorScheme.red);
+            EMPTY_COUNTER++;
+
+            if (EMPTY_COUNTER == 3) {
+              JOptionPane.showMessageDialog(
+                null,
+                "You have entered an empty input 3 times. The program will now exit.",
+                "Invalid Input",
+                JOptionPane.ERROR_MESSAGE
+              );
+              System.exit(0);
+            }
+            
+            return;
+          }
+          
           if (
             Integer.parseInt(text_1.getText()) > 50 ||
             Integer.parseInt(text_1.getText()) < 1
@@ -160,10 +181,13 @@ public class GamePanel extends JPanel {
 
           if (Integer.parseInt(text_1.getText()) > UNKNOW_NUMBER) {
             text_2.setText("Too High");
+            music.soundEffect("asset/incorrect.wav");
           } else if (Integer.parseInt(text_1.getText()) < UNKNOW_NUMBER) {
             text_2.setText("Too Low");
+            music.soundEffect("asset/incorrect.wav");
           } else {
             text_2.setText("Correct");
+            music.soundEffect("asset/correct.wav");
             text_2.setForeground(colorScheme.green);
             SCORE++;
             database.setScore(SCORE);
