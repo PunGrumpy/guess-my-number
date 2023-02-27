@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.JFrame;
 
 public class Game extends JFrame {
@@ -14,6 +15,7 @@ public class Game extends JFrame {
     jframe.setPreferredSize(screenSize);
     jframe.setMinimumSize(screenSize);
     jframe.setMaximumSize(screenSize);
+    jframe.setIconImage(Toolkit.getDefaultToolkit().getImage("asset/icon.png"));
     jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     jframe.add(new GamePanel(this));
     jframe.setAlwaysOnTop(false);
