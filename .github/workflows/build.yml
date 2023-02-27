@@ -27,7 +27,8 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-      - name: Publish to GitHub Packages
-        run: mvn --batch-mode deploy -Dmaven.test.skip
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      - name: Persist workflow data as artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: github-actions-artifact
+          path: staging
