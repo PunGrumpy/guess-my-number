@@ -1,4 +1,4 @@
-# Java Game
+# Guess My Number 🔮
 
 ![MIT License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)
 ![Java](https://img.shields.io/badge/Java-19.0.2-ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
