@@ -6,7 +6,7 @@ public class RandomNumber {
 
   private int range;
   private SecureRandom random;
-  private int[] ranges = {1000, 10000, 100000, 1000000};
+  private int[] ranges = { 1000, 10000, 100000, 1000000 };
 
   public RandomNumber() {
     random = new SecureRandom();
