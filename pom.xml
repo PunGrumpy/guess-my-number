@@ -1,82 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.java.game</groupId>
-  <artifactId>guess-my-number</artifactId>
-  <name>Guess My Number</name>
-  <version>1.0.1</version>
-  <description>Guess the mystery number &#x1f52e;</description>
-  <contributors>
-    <contributor>
-      <name>Teachin Pongmanee (NongFeen)</name>
-      <url>https://github.com/NongFeen</url>
-    </contributor>
-    <contributor>
-      <name>Teeradon Numthong (custapq)</name>
-      <url>https://github.com/custapq</url>
-    </contributor>
-    <contributor>
-      <name>Noppakorn Kaewsalabnil (PunGrumpy)</name>
-      <url>https://github.com/PunGrumpy</url>
-    </contributor>
-  </contributors>
-  <licenses>
-    <license>
-      <name>MIT License</name>
-      <url>https://opensource.org/licenses/MIT</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
-  <build>
-    <sourceDirectory>${basedir}/src</sourceDirectory>
-    <testSourceDirectory>${basedir}/src/test</testSourceDirectory>
-    <plugins>
-      <plugin>
-        <artifactId>maven-shade-plugin</artifactId>
-        <version>3.4.1</version>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-            <configuration>
-              <transformers>
-                <transformer>
-                  <mainClass>main.MainClass</mainClass>
-                </transformer>
-              </transformers>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.10.1</version>
-        <configuration>
-          <source>1.9</source>
-          <target>1.9</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>sonar-maven-plugin</artifactId>
-        <version>3.9.1.2184</version>
-      </plugin>
-    </plugins>
-  </build>
-  <distributionManagement>
-    <repository>
-      <id>github</id>
-      <name>GitHub Packages</name>
-      <url>https://maven.pkg.github.com/cvitaa11/java-spring-demo</url>
-    </repository>
-  </distributionManagement>
-  <properties>
-    <maven.complier.source>3.10.0</maven.complier.source>
-    <maven.complier.target>3.10.0</maven.complier.target>
-    <sonar.organization>pungrumpy</sonar.organization>
-    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-    <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
-  </properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>Guess My Number</name>
+    <description>Guess the mystery number 🔮</description>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <groupId>org.javaGame</groupId>
+    <artifactId>guess-my-number</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0.1</version>
+
+    <contributors>
+        <contributor>
+            <name>Teachin Pongmanee (NongFeen)</name>
+            <url>https://github.com/NongFeen</url>
+        </contributor>
+        <contributor>
+            <name>Teeradon Numthong (custapq)</name>
+            <url>https://github.com/custapq</url>
+        </contributor>
+        <contributor>
+            <name>Noppakorn Kaewsalabnil (PunGrumpy)</name>
+            <url>https://github.com/PunGrumpy</url>
+        </contributor>
+    </contributors>
+
+    <properties>
+        <maven.complier.source>3.10.0</maven.complier.source>
+        <maven.complier.target>3.10.0</maven.complier.target>
+        <sonar.organization>pungrumpy</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
+    </properties>
+
+    <build>
+        <sourceDirectory>${basedir}/src</sourceDirectory>
+        <testSourceDirectory>${basedir}/src/test</testSourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.4.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer
+                                    implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>main.MainClass</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version>
+                <configuration>
+                    <source>1.9</source>
+                    <target>1.9</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.9.1.2184</version>
+            </plugin>
+        </plugins>
+    </build>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/cvitaa11/java-spring-demo</url>
+        </repository>
+    </distributionManagement>
 </project>
