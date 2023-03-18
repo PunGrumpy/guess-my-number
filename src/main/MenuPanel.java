@@ -1,10 +1,8 @@
 package main;
 
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.Font;
 
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -34,6 +32,9 @@ public class MenuPanel extends JPanel {
   }
 
   private void Render() {
+    database.setScore(0);
+    database.saveScore();
+    
     JLabel title = new JLabel("Guess My Number 🔮");
     title.setForeground(colorScheme.white);
     title.setFont(new Font(Font.DIALOG, Font.BOLD, 30));
