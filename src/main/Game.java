@@ -1,26 +1,36 @@
 package main;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class Game extends JFrame {
 
   protected JFrame jframe;
-  private Dimension screenSize = new Dimension(700, 600);
+  protected JPanel viewPanel;
+  private Dimension screenSize = new Dimension(350, 660);
 
   public Game() {
-    jframe = new JFrame("Java Game");
-    jframe.setTitle("Guess My Number");
-    jframe.setPreferredSize(screenSize);
-    jframe.setMinimumSize(screenSize);
-    jframe.setMaximumSize(screenSize);
-    jframe.setIconImage(Toolkit.getDefaultToolkit().getImage("asset/icon.png"));
-    jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    jframe.add(new GamePanel(this));
-    jframe.setAlwaysOnTop(false);
-    jframe.setResizable(false); // Prevents the window from being resized
-    jframe.pack(); // Adjusts the size of the window to fit the content
-    jframe.setVisible(true);
+    viewPanel = new JPanel(new BorderLayout());
+    this.setTitle("Guess My Number 🔮");
+    this.setPreferredSize(screenSize);
+    this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    this.add(viewPanel, BorderLayout.CENTER);
+    showView(new MenuPanel(this));
+    this.setVisible(true);
+    this.pack();
+    this.setIconImage(Toolkit.getDefaultToolkit().getImage("asset/icon.png"));
+    this.setResizable(false);
+    this.setLocationRelativeTo(null);
+
+  }
+
+  public void showView(JPanel jpanel) {
+    viewPanel.removeAll();
+    viewPanel.add(jpanel, BorderLayout.CENTER);
+    viewPanel.revalidate();
+    viewPanel.repaint();
   }
 }
