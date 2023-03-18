@@ -4,20 +4,16 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Dimension;
-import java.awt.TextField;
-import java.awt.Label; // don't forget delete this becase useless
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import utility.Wait;
 import utility.Music;
 import utility.Database;
@@ -38,12 +34,10 @@ public class GamePanel extends JPanel {
 
   private final Game game;
   
-  private JFrame jframe;
   private Database database;
   private RandomNumber randomNumber;
   private ColorScheme colorScheme;
   private Music music = new Music();
-  private Wait wait;
 
   private int SCORE, HIGH_SCORE;
   private int UNKNOW_NUMBER, RANGE_NUMBER;
@@ -205,7 +199,7 @@ public class GamePanel extends JPanel {
             guess_field.setEnabled(false);
             submit_button.setEnabled(false);
             
-            wait = new Wait(3);
+            new Wait(3);
 
             int restart = JOptionPane.showConfirmDialog(null, "Do you want to restart the game?", "Restart Game", JOptionPane.YES_NO_OPTION);
             if(restart == JOptionPane.YES_OPTION) {
