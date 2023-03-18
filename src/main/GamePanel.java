@@ -1,31 +1,30 @@
 package main;
 
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import utility.Music;
-import utility.Database;
 import utility.ColorScheme;
+import utility.Database;
+import utility.Music;
 import utility.RandomNumber;
 
 public class GamePanel extends JPanel {
 
   private final Game game;
-  
+
   private Database database;
   private RandomNumber randomNumber;
   private ColorScheme colorScheme;
@@ -56,7 +55,7 @@ public class GamePanel extends JPanel {
   private void Render() {
     JPanel gridPanel;
     ColorScheme colorScheme = new ColorScheme();
-    
+
     JLabel title = new JLabel("Random The Number");
     title.setForeground(colorScheme.white);
     title.setFont(new Font(Font.DIALOG, Font.BOLD, 30));
@@ -79,7 +78,7 @@ public class GamePanel extends JPanel {
     unknown_number.setBorder(new EmptyBorder(20, 0, 0, 0));
     unknown_number.setAlignmentX(CENTER_ALIGNMENT);
     add(unknown_number);
-    
+
     JLabel status_value = new JLabel("Input a number");
     status_value.setForeground(colorScheme.white);
     status_value.setFont(new Font(Font.DIALOG, Font.BOLD, 25));
@@ -135,58 +134,100 @@ public class GamePanel extends JPanel {
     linkMenu(back_button);
     add(back_button);
 
-    JLabel score_label = new JLabel("Score: " + SCORE + "   🏆   High Score: " + HIGH_SCORE);
+    JLabel score_label = new JLabel(
+      "Score: " + SCORE + "   🏆   High Score: " + HIGH_SCORE
+    );
     score_label.setForeground(colorScheme.white);
     score_label.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     score_label.setBorder(new EmptyBorder(20, 0, 0, 0));
     score_label.setAlignmentX(CENTER_ALIGNMENT);
     add(score_label);
 
-    submit_button.addMouseListener(new MouseAdapter() {
-      @Override
-      public void mouseClicked(MouseEvent e) {
-        changeStatusValue(gridPanel, status_value, guess_field, unknown_number, submit_button, continue_button, back_button, score_label);
+    submit_button.addMouseListener(
+      new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+          changeStatusValue(
+            gridPanel,
+            status_value,
+            guess_field,
+            unknown_number,
+            submit_button,
+            continue_button,
+            back_button,
+            score_label
+          );
+        }
       }
-    });
+    );
 
-    guess_field.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        changeStatusValue(gridPanel, status_value, guess_field, unknown_number, submit_button, continue_button, back_button, score_label);
+    guess_field.addActionListener(
+      new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+          changeStatusValue(
+            gridPanel,
+            status_value,
+            guess_field,
+            unknown_number,
+            submit_button,
+            continue_button,
+            back_button,
+            score_label
+          );
+        }
       }
-    });
+    );
   }
 
   public void linkMenu(JLabel back_button) {
-    back_button.addMouseListener(new MouseAdapter() {
-      @Override
-      public void mouseClicked(MouseEvent e) {
-        int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to go back to the menu?", "Warning", JOptionPane.YES_NO_OPTION);
-        if (dialogResult == JOptionPane.YES_OPTION) {
-          game.showView(new MenuPanel(game));
+    back_button.addMouseListener(
+      new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+          int dialogResult = JOptionPane.showConfirmDialog(
+            null,
+            "Are you sure you want to go back to the menu?",
+            "Warning",
+            JOptionPane.YES_NO_OPTION
+          );
+          if (dialogResult == JOptionPane.YES_OPTION) {
+            game.showView(new MenuPanel(game));
+          }
         }
       }
-    });
+    );
   }
 
   public void continueGame(JLabel continue_button) {
-    continue_button.addMouseListener(new MouseAdapter() {
-      @Override
-      public void mouseClicked(MouseEvent e) {
-        game.showView(new GamePanel(game));
+    continue_button.addMouseListener(
+      new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+          game.showView(new GamePanel(game));
+        }
       }
-    });
+    );
   }
 
-  private void changeStatusValue(JPanel gridPanel, JLabel status_value, JTextField guess_field, JLabel unknown_number, JLabel submit_button, JLabel continue_button, JLabel back_button, JLabel score_label) {
+  private void changeStatusValue(
+    JPanel gridPanel,
+    JLabel status_value,
+    JTextField guess_field,
+    JLabel unknown_number,
+    JLabel submit_button,
+    JLabel continue_button,
+    JLabel back_button,
+    JLabel score_label
+  ) {
     int guess_number = 0;
-    
+
     try {
       guess_number = Integer.parseInt(guess_field.getText());
     } catch (NumberFormatException e) {
       status_value.setText("Invalid number!");
     }
-        
+
     if (guess_number == UNKNOW_NUMBER) {
       status_value.setText("Correct! You win!");
       music.soundEffect("asset/correct.wav");
@@ -197,7 +238,9 @@ public class GamePanel extends JPanel {
       continue_button.setVisible(true);
       back_button.setVisible(true);
       SCORE++;
-      score_label.setText("Score: " + SCORE + "   🏆   High Score: " + HIGH_SCORE);
+      score_label.setText(
+        "Score: " + SCORE + "   🏆   High Score: " + HIGH_SCORE
+      );
       database.setScore(SCORE);
       database.saveScore();
       if (SCORE > HIGH_SCORE) {
