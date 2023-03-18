@@ -144,8 +144,8 @@ public class GamePanel extends JPanel {
     back_button.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     back_button.setAlignmentX(CENTER_ALIGNMENT);
     back_button.setCursor(new Cursor(Cursor.HAND_CURSOR));
-    back_button.setVisible(false);
-    // linkMenu(back_button);
+    back_button.setVisible(true);
+    linkMenu(back_button);
     add(back_button);
 
     // Score Label & High Score Label
@@ -206,7 +206,6 @@ public class GamePanel extends JPanel {
       music.soundEffect("asset/correct.wav");
       unknown_number.setText(String.valueOf("🏆"));
       unknown_number.setForeground(colorScheme.gold);
-      // Remove gridPanel
       gridPanel.setVisible(false);
       submit_button.setVisible(false);
       continue_button.setVisible(true);
