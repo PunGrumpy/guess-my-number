@@ -24,7 +24,6 @@ public class Game extends JFrame {
     this.setIconImage(Toolkit.getDefaultToolkit().getImage("asset/icon.png"));
     this.setResizable(false);
     this.setLocationRelativeTo(null);
-
   }
 
   public void showView(JPanel jpanel) {
