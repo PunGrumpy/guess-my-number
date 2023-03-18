@@ -23,4 +23,14 @@ public class Game extends JFrame {
     jframe.setVisible(true);
     jframe.setLocationRelativeTo(null); // Centers the window
   }
+
+  public void restartGame() {
+    jframe.dispose();
+    new Game();
+  }
+
+  public void exitGame() {
+    jframe.dispose();
+  }
+  
 }

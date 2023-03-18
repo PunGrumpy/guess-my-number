@@ -18,8 +18,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import utility.Database;
+import utility.Wait;
 import utility.Music;
+import utility.Database;
 import utility.RandomNumber;
 
 class ColorScheme {
@@ -42,9 +43,10 @@ public class GamePanel extends JPanel {
   private RandomNumber randomNumber;
   private ColorScheme colorScheme;
   private Music music = new Music();
+  private Wait wait;
 
   private int SCORE, HIGH_SCORE;
-  private int UNKNOW_NUMBER;
+  private int UNKNOW_NUMBER, RANGE_NUMBER;
   private int EMPTY_COUNTER = 0;
 
   public GamePanel(Game game) {
@@ -52,6 +54,9 @@ public class GamePanel extends JPanel {
     colorScheme = new ColorScheme();
     randomNumber = new RandomNumber();
     UNKNOW_NUMBER = randomNumber.GET_RANDOM_NUMBER();
+    RANGE_NUMBER = randomNumber.GET_RANGE_NUMBER();
+
+    System.out.println("Unknow number: " + UNKNOW_NUMBER);
 
     this.game = game;
     this.setBackground(colorScheme.indigo);
@@ -128,21 +133,43 @@ public class GamePanel extends JPanel {
     status_value.setAlignmentX(CENTER_ALIGNMENT);
     add(status_value);
 
-    // Label score
-    JLabel score_label = new JLabel("Score: " + SCORE);
+    // Score Label
+    JLabel score_label = new JLabel("Score: ");
     score_label.setForeground(colorScheme.white);
     score_label.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     score_label.setBorder(new EmptyBorder(25, 0, 0, 0));
     score_label.setAlignmentX(CENTER_ALIGNMENT);
     add(score_label);
 
-    // Label high score
-    JLabel high_score_label = new JLabel("High Score: " + HIGH_SCORE);
+    // Score Field
+    JTextField score_field = new JTextField();
+    score_field.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
+    score_field.setBackground(colorScheme.white);
+    score_field.setForeground(colorScheme.indigo);
+    score_field.setHorizontalAlignment(JTextField.CENTER);
+    score_field.setBorder(new EmptyBorder(0, 15, 0, 15));
+    score_field.setEditable(false);
+    score_field.setText(SCORE + "");
+    add(score_field);
+
+    // High score Label
+    JLabel high_score_label = new JLabel("High Score: ");
     high_score_label.setForeground(colorScheme.white);
     high_score_label.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     high_score_label.setBorder(new EmptyBorder(25, 0, 0, 0));
     high_score_label.setAlignmentX(CENTER_ALIGNMENT);
     add(high_score_label);
+
+    // High score Field
+    JTextField high_score_field = new JTextField();
+    high_score_field.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
+    high_score_field.setBackground(colorScheme.white);
+    high_score_field.setForeground(colorScheme.indigo);
+    high_score_field.setHorizontalAlignment(JTextField.CENTER);
+    high_score_field.setBorder(new EmptyBorder(0, 15, 0, 15));
+    high_score_field.setEditable(false);
+    high_score_field.setText(HIGH_SCORE + "");
+    add(high_score_field);
 
     // Button back
     JButton back_button = new JButton("Back");
@@ -166,45 +193,67 @@ public class GamePanel extends JPanel {
     submit_button.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        if(guess_label != null) {
+        if(guess_field.getText().equals("")) {
+          System.out.println("Empty");
           status_value.setText("Please enter your guess!");
           status_value.setForeground(colorScheme.red);
           EMPTY_COUNTER++;
+
+          if(EMPTY_COUNTER == 3) {
+            status_value.setText("You have entered an empty guess 3 times!");
+            status_value.setForeground(colorScheme.red);
+            guess_field.setEnabled(false);
+            submit_button.setEnabled(false);
+            
+            wait = new Wait(3);
+
+            int restart = JOptionPane.showConfirmDialog(null, "Do you want to restart the game?", "Restart Game", JOptionPane.YES_NO_OPTION);
+            if(restart == JOptionPane.YES_OPTION) {
+              game.restartGame();
+            } else {
+              game.exitGame();
+            }
+          }
         }
 
-        if(EMPTY_COUNTER == 3) {
-          JOptionPane.showMessageDialog(
-                null,
-                "You have entered an empty input 3 times. The program will now exit.",
-                "Invalid Input",
-                JOptionPane.ERROR_MESSAGE
-              );
-              System.exit(0);
+        try {
+          Integer.parseInt(guess_field.getText());
+        } catch (NumberFormatException ex) {
+          status_value.setText("Please enter a number!");
+          status_value.setForeground(colorScheme.red);
+          return;
+        }
+        
+        if(Integer.parseInt(guess_field.getText()) > RANGE_NUMBER || Integer.parseInt(guess_field.getText()) < 1) {
+          status_value.setText("Valid range is 1 to " + RANGE_NUMBER);
+          status_value.setForeground(colorScheme.red);
         }
 
-        System.out.println(UNKNOW_NUMBER);
+        if(Integer.parseInt(guess_field.getText()) > UNKNOW_NUMBER) {
+          status_value.setText("Too High");
+          music.soundEffect("asset/incorrect.wav");
+        } else if(Integer.parseInt(guess_field.getText()) < UNKNOW_NUMBER) {
+          status_value.setText("Too Low");
+          music.soundEffect("asset/incorrect.wav");
+        } else {
+          status_value.setText("Correct ✅");
+          music.soundEffect("asset/correct.wav");
+          SCORE++;
+          database.setScore(SCORE);
+          database.saveScore();
+          UNKNOW_NUMBER = randomNumber.GET_RANDOM_NUMBER();
+          status_value.setText("Waiting for input...");
+          status_value.setForeground(colorScheme.white);
+          score_field.setText(String.valueOf(SCORE));
+          guess_field.setText("");
 
-        // if(Integer.parseInt(guess_label.getText()) > UNKNOW_NUMBER || Integer.parseInt(guess_label.getText()) < 1) {
-        //   status_value.setText("Please enter a number between 1 and " + UNKNOW_NUMBER);
-        //   status_value.setForeground(colorScheme.red);
-        // }
-
-        // if(Integer.parseInt(guess_label.getText()) > UNKNOW_NUMBER) {
-        //   status_value.setText("Please enter a number lower than " + UNKNOW_NUMBER);
-        //   status_value.setForeground(colorScheme.red);
-        // } else if(Integer.parseInt(guess_label.getText()) < UNKNOW_NUMBER) {
-        //   status_value.setText("Please enter a number higher than " + UNKNOW_NUMBER);
-        //   status_value.setForeground(colorScheme.red);
-        // } else {
-        //   status_value.setText("Correct! You have guessed the number!");
-        //   status_value.setForeground(colorScheme.green);
-        //   SCORE++;
-        //   score_label.setText("Score: " + SCORE);
-        //   if(SCORE > HIGH_SCORE) {
-        //     HIGH_SCORE = SCORE;
-        //     high_score_label.setText("High Score: " + HIGH_SCORE);
-        //   }
-        // }
+          if(SCORE > HIGH_SCORE) {
+            HIGH_SCORE = SCORE;
+            database.setHighScore(HIGH_SCORE);
+            database.saveHighScore();
+            high_score_field.setText(String.valueOf(HIGH_SCORE));
+          }
+        }
       }
     });
   }
