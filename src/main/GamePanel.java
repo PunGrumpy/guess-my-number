@@ -2,15 +2,21 @@ package main;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Label;
+import java.awt.GridLayout;
+import java.awt.Dimension;
 import java.awt.TextField;
+import java.awt.Label; // don't forget delete this becase useless
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import utility.Database;
 import utility.Music;
@@ -29,6 +35,8 @@ class ColorScheme {
 
 public class GamePanel extends JPanel {
 
+  private final Game game;
+  
   private JFrame jframe;
   private Database database;
   private RandomNumber randomNumber;
@@ -40,11 +48,13 @@ public class GamePanel extends JPanel {
   private int EMPTY_COUNTER = 0;
 
   public GamePanel(Game game) {
-    jframe = game.jframe;
     database = new Database();
     colorScheme = new ColorScheme();
     randomNumber = new RandomNumber();
     UNKNOW_NUMBER = randomNumber.GET_RANDOM_NUMBER();
+
+    this.game = game;
+    this.setBackground(colorScheme.indigo);
 
     SCORE = database.showScore();
     HIGH_SCORE = database.showHighScore();
@@ -52,188 +62,150 @@ public class GamePanel extends JPanel {
     BoxLayout boxlayout = new BoxLayout(this, BoxLayout.Y_AXIS);
     this.setLayout(boxlayout);
 
-    this.setBackground(colorScheme.indigo);
-    jframe.getContentPane().setBackground(colorScheme.indigo);
-
     Render();
-
-    jframe.setLocationRelativeTo(null);
   }
 
   private void Render() {
+    JPanel gridPanel;
+    ColorScheme colorScheme = new ColorScheme();
+    
     // Title
-    Label label_0 = new Label("Random Number Between 1 and 50");
-    label_0.setForeground(colorScheme.white);
-    label_0.setBounds(160, 40, 800, 20);
-    label_0.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
-    jframe.add(label_0);
+    JLabel title = new JLabel("Random Number Between 1 and " + randomNumber.GET_RANGE_NUMBER());
+    title.setForeground(colorScheme.white);
+    title.setFont(new Font(Font.DIALOG, Font.BOLD, 30));
+    title.setBorder(new EmptyBorder(20, 0, 0, 0));
+    title.setAlignmentX(CENTER_ALIGNMENT);
+    add(title);
 
-    // Label input
-    Label label_1 = new Label("Enter your guess: ");
-    label_1.setForeground(colorScheme.white);
-    label_1.setBounds(170, 100, 230, 30);
-    label_1.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
-    jframe.add(label_1);
+    // Label input guess
+    JLabel guess_label = new JLabel("Enter your guess: ");
+    guess_label.setForeground(colorScheme.white);
+    guess_label.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
+    guess_label.setBorder(new EmptyBorder(25, 0, 0, 0));
+    guess_label.setAlignmentX(CENTER_ALIGNMENT);
+    add(guess_label);
 
-    // Field input
-    TextField text_1 = new TextField();
-    text_1.setBackground(colorScheme.brigthBlueGray);
-    text_1.setBounds(400, 100, 80, 30);
-    text_1.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
-    jframe.add(text_1);
+    gridPanel = new JPanel();
+    gridPanel.setBackground(colorScheme.indigo);
+    gridPanel.setMaximumSize(new Dimension(300, 75));
+    gridPanel.setBorder(BorderFactory.createEmptyBorder(25, 20, 0, 0));
+    gridPanel.setLayout(new GridLayout(0, 2));
+    gridPanel.setOpaque(false); // make the panel transparent
 
-    // Button input
-    JButton button_1 = new JButton("Guess");
-    button_1.setBounds(290, 150, 100, 50);
-    button_1.setBorder(new LineBorder(colorScheme.blueGray, 2));
-    button_1.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
-    jframe.add(button_1);
+    // TextField input guess
+    JTextField guess_field = new JTextField();
+    guess_field.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
+    guess_field.setBackground(colorScheme.white);
+    guess_field.setForeground(colorScheme.indigo);
+    guess_field.setHorizontalAlignment(JTextField.CENTER);
+    guess_field.setBorder(new EmptyBorder(0, 15, 0, 15));
+    gridPanel.add(guess_field);
+    
+    // Button submit guess
+    JButton submit_button = new JButton("Submit");
+    submit_button.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
+    submit_button.setBackground(colorScheme.white);
+    submit_button.setForeground(colorScheme.indigo);
+    submit_button.setBorder(new EmptyBorder(0, 15, 0, 15));
+    submit_button.setAlignmentX(CENTER_ALIGNMENT);
+    gridPanel.add(submit_button);
 
-    // Button action
-    Label label_2 = new Label("Check: ");
-    label_2.setForeground(colorScheme.white);
-    label_2.setBounds(210, 220, 100, 30);
-    label_2.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
-    jframe.add(label_2);
+    add(gridPanel);
 
-    // Check input
-    TextField text_2 = new TextField();
-    text_2.setBackground(colorScheme.brigthBlueGray);
-    text_2.setBounds(320, 220, 150, 30);
-    text_2.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
-    jframe.add(text_2);
-    text_2.setText("-");
+    // Status label
+    JLabel status_label = new JLabel("Status: ");
+    status_label.setForeground(colorScheme.white);
+    status_label.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
+    status_label.setBorder(new EmptyBorder(25, 0, 0, 0));
+    status_label.setAlignmentX(CENTER_ALIGNMENT);
+    add(status_label);
 
-    // Score label
-    Label label_3 = new Label("Score: ");
-    label_3.setForeground(colorScheme.white);
-    label_3.setBounds(220, 260, 100, 30);
-    label_3.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
-    jframe.add(label_3);
+    // Status value
+    JLabel status_value = new JLabel("Waiting for input...");
+    status_value.setForeground(colorScheme.white);
+    status_value.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
+    status_value.setBorder(new EmptyBorder(25, 0, 0, 0));
+    status_value.setAlignmentX(CENTER_ALIGNMENT);
+    add(status_value);
 
-    // Highscore field
-    TextField text_3 = new TextField();
-    text_3.setBackground(colorScheme.brigthBlueGray);
-    text_3.setBounds(320, 260, 150, 30);
-    text_3.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
-    jframe.add(text_3);
-    text_3.setText(SCORE + "");
+    // Label score
+    JLabel score_label = new JLabel("Score: " + SCORE);
+    score_label.setForeground(colorScheme.white);
+    score_label.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
+    score_label.setBorder(new EmptyBorder(25, 0, 0, 0));
+    score_label.setAlignmentX(CENTER_ALIGNMENT);
+    add(score_label);
 
-    // Highscore label
-    Label label_4 = new Label("High Score: ");
-    label_4.setForeground(colorScheme.white);
-    label_4.setBounds(170, 300, 130, 30);
-    label_4.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
-    jframe.add(label_4);
+    // Label high score
+    JLabel high_score_label = new JLabel("High Score: " + HIGH_SCORE);
+    high_score_label.setForeground(colorScheme.white);
+    high_score_label.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
+    high_score_label.setBorder(new EmptyBorder(25, 0, 0, 0));
+    high_score_label.setAlignmentX(CENTER_ALIGNMENT);
+    add(high_score_label);
 
-    // Highscore field
-    TextField text_4 = new TextField();
-    text_4.setBackground(colorScheme.brigthBlueGray);
-    text_4.setBounds(320, 300, 150, 30);
-    text_4.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
-    jframe.add(text_4);
-    text_4.setText(HIGH_SCORE + "");
+    // Button back
+    JButton back_button = new JButton("Back");
+    back_button.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
+    back_button.setBackground(colorScheme.white);
+    back_button.setForeground(colorScheme.indigo);
+    back_button.setBorder(new EmptyBorder(10, 0, 10, 0));
+    back_button.setAlignmentX(CENTER_ALIGNMENT);
+    // linkMenu(back_button);
+    add(back_button);
 
-    // Reset button
-    JButton button_2 = new JButton("Reset");
-    button_2.setBounds(290, 370, 100, 50);
-    button_2.setBorder(new LineBorder(colorScheme.blueGray, 2));
-    button_2.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
-    jframe.add(button_2);
+    // Button reset
+    JButton reset_button = new JButton("Reset");
+    reset_button.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
+    reset_button.setBackground(colorScheme.white);
+    reset_button.setForeground(colorScheme.indigo);
+    reset_button.setBorder(new EmptyBorder(10, 0, 10, 0));
+    reset_button.setAlignmentX(CENTER_ALIGNMENT);
+    add(reset_button);
 
-    // Exit button
-    JButton button_3 = new JButton("Exit");
-    button_3.setBounds(290, 430, 100, 50);
-    button_3.setBorder(new LineBorder(colorScheme.blueGray, 2));
-    button_3.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
-    jframe.add(button_3);
+    submit_button.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        if(guess_label != null) {
+          status_value.setText("Please enter your guess!");
+          status_value.setForeground(colorScheme.red);
+          EMPTY_COUNTER++;
+        }
 
-    button_1.addActionListener(
-      new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-          if (text_1.getText().equals("")) {
-            text_2.setText("Invalid");
-            text_2.setForeground(colorScheme.red);
-            EMPTY_COUNTER++;
-
-            if (EMPTY_COUNTER == 3) {
-              JOptionPane.showMessageDialog(
+        if(EMPTY_COUNTER == 3) {
+          JOptionPane.showMessageDialog(
                 null,
                 "You have entered an empty input 3 times. The program will now exit.",
                 "Invalid Input",
                 JOptionPane.ERROR_MESSAGE
               );
               System.exit(0);
-            }
-
-            return;
-          }
-
-          if (
-            Integer.parseInt(text_1.getText()) > 50 ||
-            Integer.parseInt(text_1.getText()) < 1
-          ) {
-            text_2.setText("Invalid");
-            text_2.setForeground(colorScheme.red);
-            return;
-          }
-
-          if (Integer.parseInt(text_1.getText()) > UNKNOW_NUMBER) {
-            text_2.setText("Too High");
-            music.soundEffect("asset/incorrect.wav");
-          } else if (Integer.parseInt(text_1.getText()) < UNKNOW_NUMBER) {
-            text_2.setText("Too Low");
-            music.soundEffect("asset/incorrect.wav");
-          } else {
-            text_2.setText("Correct");
-            music.soundEffect("asset/correct.wav");
-            text_2.setForeground(colorScheme.green);
-            SCORE++;
-            database.setScore(SCORE);
-            database.saveScore();
-            UNKNOW_NUMBER = randomNumber.GET_RANDOM_NUMBER();
-            text_2.setForeground(colorScheme.white);
-            text_3.setText(String.valueOf(SCORE));
-            if (SCORE > HIGH_SCORE) {
-              HIGH_SCORE = SCORE;
-              database.setHighScore(HIGH_SCORE);
-              database.saveHighScore();
-              text_4.setText(String.valueOf(HIGH_SCORE));
-            }
-          }
         }
-      }
-    );
 
-    button_2.addActionListener(
-      new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-          text_3.setText("-");
-          SCORE = 0;
-          UNKNOW_NUMBER = randomNumber.GET_RANDOM_NUMBER();
-          text_2.setText("-");
-          text_1.setText("");
-        }
-      }
-    );
+        System.out.println(UNKNOW_NUMBER);
 
-    button_3.addActionListener(
-      new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-          int exit = javax.swing.JOptionPane.showConfirmDialog(
-            null,
-            "Are you sure you want to exit?",
-            "Exit",
-            JOptionPane.YES_NO_OPTION
-          );
-          if (exit == javax.swing.JOptionPane.YES_OPTION) {
-            System.exit(0);
-          }
-        }
+        // if(Integer.parseInt(guess_label.getText()) > UNKNOW_NUMBER || Integer.parseInt(guess_label.getText()) < 1) {
+        //   status_value.setText("Please enter a number between 1 and " + UNKNOW_NUMBER);
+        //   status_value.setForeground(colorScheme.red);
+        // }
+
+        // if(Integer.parseInt(guess_label.getText()) > UNKNOW_NUMBER) {
+        //   status_value.setText("Please enter a number lower than " + UNKNOW_NUMBER);
+        //   status_value.setForeground(colorScheme.red);
+        // } else if(Integer.parseInt(guess_label.getText()) < UNKNOW_NUMBER) {
+        //   status_value.setText("Please enter a number higher than " + UNKNOW_NUMBER);
+        //   status_value.setForeground(colorScheme.red);
+        // } else {
+        //   status_value.setText("Correct! You have guessed the number!");
+        //   status_value.setForeground(colorScheme.green);
+        //   SCORE++;
+        //   score_label.setText("Score: " + SCORE);
+        //   if(SCORE > HIGH_SCORE) {
+        //     HIGH_SCORE = SCORE;
+        //     high_score_label.setText("High Score: " + HIGH_SCORE);
+        //   }
+        // }
       }
-    );
+    });
   }
 }
