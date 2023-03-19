@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.Cursor;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -8,6 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -16,9 +21,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import utility.ColorScheme;
-import utility.Database;
 import utility.Music;
+import utility.Database;
+import utility.ColorScheme;
 import utility.RandomNumber;
 
 public class GamePanel extends JPanel {
@@ -31,6 +36,7 @@ public class GamePanel extends JPanel {
 
   private int SCORE, HIGH_SCORE;
   private int UNKNOW_NUMBER, RANGE_NUMBER;
+  private int EMPTY_FIELD = 0;
 
   public GamePanel(Game game) {
     database = new Database();
@@ -98,7 +104,7 @@ public class GamePanel extends JPanel {
     gridPanel.add(guess_field);
 
     JLabel submit_button = new JLabel("Submit");
-    submit_button.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
+    submit_button.setBorder(BorderFactory.createEmptyBorder(0, 15, 10, 0));
     submit_button.setIcon(new ImageIcon("asset/submit.png"));
     submit_button.setHorizontalTextPosition(JLabel.CENTER);
     submit_button.setForeground(ColorScheme.white);
@@ -136,7 +142,7 @@ public class GamePanel extends JPanel {
     );
     score_label.setForeground(ColorScheme.white);
     score_label.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
-    score_label.setBorder(new EmptyBorder(20, 0, 0, 0));
+    score_label.setBorder(new EmptyBorder(25, 0, 0, 0));
     score_label.setAlignmentX(CENTER_ALIGNMENT);
     add(score_label);
 
@@ -217,15 +223,43 @@ public class GamePanel extends JPanel {
     JLabel back_button,
     JLabel score_label
   ) {
-    int guess_number = 0;
+
+    if(EMPTY_FIELD == 3) {
+      try {
+        Desktop.getDesktop().browse(new URI("https://www.youtube.com/watch?v=dQw4w9WgXcQ"));
+        System.exit(0);
+      } catch (IOException | URISyntaxException e) {
+        e.printStackTrace();
+      }
+    }
+    
+    if(guess_field.getText().equals("")) {
+      status_value.setText("Please enter a number!");
+      EMPTY_FIELD++;
+      return;
+    }
+    
+    status_value.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
 
     try {
-      guess_number = Integer.parseInt(guess_field.getText());
+      Integer.parseInt(guess_field.getText());
     } catch (NumberFormatException e) {
-      status_value.setText("Invalid number!");
+      status_value.setText("Please enter a number!");
+      EMPTY_FIELD++;
+      return;
     }
 
-    if (guess_number == UNKNOW_NUMBER) {
+    status_value.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
+    
+    if(Integer.parseInt(guess_field.getText()) > RANGE_NUMBER || Integer.parseInt(guess_field.getText()) < 1) {
+      status_value.setFont(new Font(Font.DIALOG, Font.BOLD, 15));
+      status_value.setText("Please enter a number between 1 and " + RANGE_NUMBER);
+      return;
+    }
+
+    status_value.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
+    
+    if (Integer.parseInt(guess_field.getText()) == UNKNOW_NUMBER) {
       status_value.setText("Correct! You win!");
       music.soundEffect("asset/correct.wav");
       unknown_number.setText(String.valueOf("🏆"));
@@ -244,10 +278,10 @@ public class GamePanel extends JPanel {
         database.setHighScore(SCORE);
         database.saveHighScore();
       }
-    } else if (guess_number > UNKNOW_NUMBER) {
+    } else if (Integer.parseInt(guess_field.getText()) > UNKNOW_NUMBER) {
       status_value.setText("Too high!");
       music.soundEffect("asset/incorrect.wav");
-    } else if (guess_number < UNKNOW_NUMBER) {
+    } else if (Integer.parseInt(guess_field.getText()) < UNKNOW_NUMBER) {
       status_value.setText("Too low!");
       music.soundEffect("asset/incorrect.wav");
     }
