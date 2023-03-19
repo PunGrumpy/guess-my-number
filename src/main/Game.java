@@ -8,15 +8,17 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 public class Game extends JFrame {
+  
+  private final int WIDTH = 360;
+  private final int HEIGHT = WIDTH * 2;
 
   protected JFrame jframe;
   protected JPanel viewPanel;
-  private Dimension screenSize = new Dimension(350, 660);
 
   public Game() {
     viewPanel = new JPanel(new BorderLayout());
     this.setTitle("Guess My Number 🔮");
-    this.setPreferredSize(screenSize);
+    this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
     this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     this.add(viewPanel, BorderLayout.CENTER);
     showView(new MenuPanel(this));
