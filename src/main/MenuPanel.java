@@ -16,11 +16,9 @@ public class MenuPanel extends JPanel {
   private final Game game;
 
   private Database database;
-  private ColorScheme colorScheme;
 
   public MenuPanel(Game game) {
     database = new Database();
-    colorScheme = new ColorScheme();
 
     this.game = game;
 
@@ -35,14 +33,14 @@ public class MenuPanel extends JPanel {
     database.saveScore();
 
     JLabel title = new JLabel("Guess My Number 🔮");
-    title.setForeground(colorScheme.black);
+    title.setForeground(ColorScheme.black);
     title.setFont(new Font(Font.DIALOG, Font.BOLD, 30));
     title.setBorder(new EmptyBorder(100, 0, 0, 0));
     title.setAlignmentX(CENTER_ALIGNMENT);
     add(title);
 
     JLabel highest_label = new JLabel("Highest Score");
-    highest_label.setForeground(colorScheme.black);
+    highest_label.setForeground(ColorScheme.black);
     highest_label.setFont(new Font(Font.DIALOG, Font.BOLD, 25));
     highest_label.setBorder(new EmptyBorder(50, 0, 0, 0));
     highest_label.setAlignmentX(CENTER_ALIGNMENT);
@@ -54,7 +52,7 @@ public class MenuPanel extends JPanel {
       "   🏆   High Score: " +
       database.showHighScore()
     );
-    highest_score.setForeground(colorScheme.black);
+    highest_score.setForeground(ColorScheme.black);
     highest_score.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     highest_score.setBorder(new EmptyBorder(10, 0, 0, 0));
     highest_score.setAlignmentX(CENTER_ALIGNMENT);
@@ -68,7 +66,7 @@ public class MenuPanel extends JPanel {
     add(play_button);
 
     JLabel play_label = new JLabel("Click to play 🎮");
-    play_label.setForeground(colorScheme.black);
+    play_label.setForeground(ColorScheme.black);
     play_label.setFont(new Font(Font.DIALOG, Font.BOLD, 25));
     play_label.setBorder(new EmptyBorder(35, 0, 0, 0));
     play_label.setAlignmentX(CENTER_ALIGNMENT);

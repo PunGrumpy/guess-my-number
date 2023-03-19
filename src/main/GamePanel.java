@@ -27,7 +27,6 @@ public class GamePanel extends JPanel {
 
   private Database database;
   private RandomNumber randomNumber;
-  private ColorScheme colorScheme;
   private Music music = new Music();
 
   private int SCORE, HIGH_SCORE;
@@ -35,13 +34,12 @@ public class GamePanel extends JPanel {
 
   public GamePanel(Game game) {
     database = new Database();
-    colorScheme = new ColorScheme();
     randomNumber = new RandomNumber();
     UNKNOW_NUMBER = randomNumber.GET_RANDOM_NUMBER();
     RANGE_NUMBER = randomNumber.GET_RANGE_NUMBER();
 
     this.game = game;
-    this.setBackground(colorScheme.indigo);
+    this.setBackground(ColorScheme.indigo);
 
     SCORE = database.showScore();
     HIGH_SCORE = database.showHighScore();
@@ -54,17 +52,16 @@ public class GamePanel extends JPanel {
 
   private void Render() {
     JPanel gridPanel;
-    ColorScheme colorScheme = new ColorScheme();
 
     JLabel title = new JLabel("Random The Number");
-    title.setForeground(colorScheme.white);
+    title.setForeground(ColorScheme.white);
     title.setFont(new Font(Font.DIALOG, Font.BOLD, 30));
     title.setBorder(new EmptyBorder(20, 0, 0, 0));
     title.setAlignmentX(CENTER_ALIGNMENT);
     add(title);
 
     JLabel subtitle = new JLabel("Between 1 and " + RANGE_NUMBER);
-    subtitle.setForeground(colorScheme.white);
+    subtitle.setForeground(ColorScheme.white);
     subtitle.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     subtitle.setBorder(new EmptyBorder(10, 0, 0, 0));
     subtitle.setAlignmentX(CENTER_ALIGNMENT);
@@ -73,14 +70,14 @@ public class GamePanel extends JPanel {
     JLabel unknown_number = new JLabel("?");
     unknown_number.setIcon(new ImageIcon("asset/question.png"));
     unknown_number.setHorizontalTextPosition(JLabel.CENTER);
-    unknown_number.setForeground(colorScheme.white);
+    unknown_number.setForeground(ColorScheme.white);
     unknown_number.setFont(new Font(Font.DIALOG, Font.BOLD, 120));
     unknown_number.setBorder(new EmptyBorder(20, 0, 0, 0));
     unknown_number.setAlignmentX(CENTER_ALIGNMENT);
     add(unknown_number);
 
     JLabel status_value = new JLabel("Input a number");
-    status_value.setForeground(colorScheme.white);
+    status_value.setForeground(ColorScheme.white);
     status_value.setFont(new Font(Font.DIALOG, Font.BOLD, 25));
     status_value.setBorder(new EmptyBorder(20, 0, 20, 0));
     status_value.setAlignmentX(CENTER_ALIGNMENT);
@@ -94,8 +91,8 @@ public class GamePanel extends JPanel {
 
     JTextField guess_field = new JTextField();
     guess_field.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
-    guess_field.setBackground(colorScheme.white);
-    guess_field.setForeground(colorScheme.indigo);
+    guess_field.setBackground(ColorScheme.white);
+    guess_field.setForeground(ColorScheme.indigo);
     guess_field.setHorizontalAlignment(JTextField.CENTER);
     guess_field.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     gridPanel.add(guess_field);
@@ -104,7 +101,7 @@ public class GamePanel extends JPanel {
     submit_button.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
     submit_button.setIcon(new ImageIcon("asset/submit.png"));
     submit_button.setHorizontalTextPosition(JLabel.CENTER);
-    submit_button.setForeground(colorScheme.white);
+    submit_button.setForeground(ColorScheme.white);
     submit_button.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     submit_button.setAlignmentX(CENTER_ALIGNMENT);
     submit_button.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -115,7 +112,7 @@ public class GamePanel extends JPanel {
     JLabel continue_button = new JLabel("Continue");
     continue_button.setIcon(new ImageIcon("asset/button.png"));
     continue_button.setHorizontalTextPosition(JLabel.CENTER);
-    continue_button.setForeground(colorScheme.white);
+    continue_button.setForeground(ColorScheme.white);
     continue_button.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     continue_button.setAlignmentX(CENTER_ALIGNMENT);
     continue_button.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -126,7 +123,7 @@ public class GamePanel extends JPanel {
     JLabel back_button = new JLabel("Back");
     back_button.setIcon(new ImageIcon("asset/button.png"));
     back_button.setHorizontalTextPosition(JLabel.CENTER);
-    back_button.setForeground(colorScheme.white);
+    back_button.setForeground(ColorScheme.white);
     back_button.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     back_button.setAlignmentX(CENTER_ALIGNMENT);
     back_button.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -137,7 +134,7 @@ public class GamePanel extends JPanel {
     JLabel score_label = new JLabel(
       "Score: " + SCORE + "   🏆   High Score: " + HIGH_SCORE
     );
-    score_label.setForeground(colorScheme.white);
+    score_label.setForeground(ColorScheme.white);
     score_label.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     score_label.setBorder(new EmptyBorder(20, 0, 0, 0));
     score_label.setAlignmentX(CENTER_ALIGNMENT);
@@ -232,7 +229,7 @@ public class GamePanel extends JPanel {
       status_value.setText("Correct! You win!");
       music.soundEffect("asset/correct.wav");
       unknown_number.setText(String.valueOf("🏆"));
-      unknown_number.setForeground(colorScheme.gold);
+      unknown_number.setForeground(ColorScheme.gold);
       gridPanel.setVisible(false);
       submit_button.setVisible(false);
       continue_button.setVisible(true);
