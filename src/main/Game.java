@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 public class Game extends JFrame {
-  
+
   private final int WIDTH = 360;
   private final int HEIGHT = WIDTH * 2;
 
