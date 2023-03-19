@@ -222,20 +222,20 @@ public class GamePanel extends JPanel {
     JLabel back_button,
     JLabel score_label
   ) {
-    if (EMPTY_FIELD == 3) {
-      try {
-        Desktop
-          .getDesktop()
-          .browse(new URI("https://www.youtube.com/watch?v=dQw4w9WgXcQ"));
-        System.exit(0);
-      } catch (IOException | URISyntaxException e) {
-        e.printStackTrace();
-      }
-    }
-
     if (guess_field.getText().equals("")) {
       status_value.setText("Please enter a number!");
       EMPTY_FIELD++;
+      System.out.println(EMPTY_FIELD);
+      if (EMPTY_FIELD == 3) {
+        try {
+          Desktop
+            .getDesktop()
+            .browse(new URI("https://www.youtube.com/watch?v=dQw4w9WgXcQ"));
+          System.exit(0);
+        } catch (IOException | URISyntaxException e) {
+          e.printStackTrace();
+        }
+      }
       return;
     }
 
