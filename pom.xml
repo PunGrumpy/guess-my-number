@@ -81,12 +81,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/cvitaa11/java-spring-demo</url>
-        </repository>
-    </distributionManagement>
 </project>
