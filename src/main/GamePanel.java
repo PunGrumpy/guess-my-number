@@ -12,7 +12,6 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -21,9 +20,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import utility.Music;
-import utility.Database;
 import utility.ColorScheme;
+import utility.Database;
+import utility.Music;
 import utility.RandomNumber;
 
 public class GamePanel extends JPanel {
@@ -223,22 +222,23 @@ public class GamePanel extends JPanel {
     JLabel back_button,
     JLabel score_label
   ) {
-
-    if(EMPTY_FIELD == 3) {
+    if (EMPTY_FIELD == 3) {
       try {
-        Desktop.getDesktop().browse(new URI("https://www.youtube.com/watch?v=dQw4w9WgXcQ"));
+        Desktop
+          .getDesktop()
+          .browse(new URI("https://www.youtube.com/watch?v=dQw4w9WgXcQ"));
         System.exit(0);
       } catch (IOException | URISyntaxException e) {
         e.printStackTrace();
       }
     }
-    
-    if(guess_field.getText().equals("")) {
+
+    if (guess_field.getText().equals("")) {
       status_value.setText("Please enter a number!");
       EMPTY_FIELD++;
       return;
     }
-    
+
     status_value.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
 
     try {
@@ -250,15 +250,20 @@ public class GamePanel extends JPanel {
     }
 
     status_value.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
-    
-    if(Integer.parseInt(guess_field.getText()) > RANGE_NUMBER || Integer.parseInt(guess_field.getText()) < 1) {
+
+    if (
+      Integer.parseInt(guess_field.getText()) > RANGE_NUMBER ||
+      Integer.parseInt(guess_field.getText()) < 1
+    ) {
       status_value.setFont(new Font(Font.DIALOG, Font.BOLD, 15));
-      status_value.setText("Please enter a number between 1 and " + RANGE_NUMBER);
+      status_value.setText(
+        "Please enter a number between 1 and " + RANGE_NUMBER
+      );
       return;
     }
 
     status_value.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
-    
+
     if (Integer.parseInt(guess_field.getText()) == UNKNOW_NUMBER) {
       status_value.setText("Correct! You win!");
       music.soundEffect("asset/correct.wav");
