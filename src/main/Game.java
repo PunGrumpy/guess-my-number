@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 public class Game extends JFrame {
 
@@ -16,7 +17,7 @@ public class Game extends JFrame {
     viewPanel = new JPanel(new BorderLayout());
     this.setTitle("Guess My Number 🔮");
     this.setPreferredSize(screenSize);
-    this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     this.add(viewPanel, BorderLayout.CENTER);
     showView(new MenuPanel(this));
     this.setVisible(true);
