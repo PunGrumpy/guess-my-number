@@ -223,7 +223,7 @@ public class GamePanel extends JPanel {
     }
 
     status_value.setFont(new Font(Font.DIALOG, Font.BOLD, 25));
-    
+
     try {
       Integer.parseInt(guess_field.getText());
     } catch (NumberFormatException e) {
