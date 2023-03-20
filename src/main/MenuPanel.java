@@ -3,6 +3,8 @@ package main;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -75,8 +77,8 @@ public class MenuPanel extends JPanel {
 
   private void linkPlay(JLabel play_button) {
     play_button.addMouseListener(
-      new java.awt.event.MouseAdapter() {
-        public void mouseClicked(java.awt.event.MouseEvent evt) {
+      new MouseAdapter() {
+        public void mouseClicked(MouseEvent evt) {
           game.showView(new GamePanel(game));
         }
       }
