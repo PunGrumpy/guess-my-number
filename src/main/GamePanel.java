@@ -231,7 +231,9 @@ public class GamePanel extends JPanel {
     if (guess_field.getText().equals("cheat")) {
       status_value.setText("The answer is: " + UNKNOW_NUMBER);
       // Copy to clipboard
-      StringSelection stringSelection = new StringSelection(String.valueOf(UNKNOW_NUMBER));
+      StringSelection stringSelection = new StringSelection(
+        String.valueOf(UNKNOW_NUMBER)
+      );
       Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
       clipboard.setContents(stringSelection, null);
       guess_field.setText("");
