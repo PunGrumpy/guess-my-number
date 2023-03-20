@@ -167,7 +167,7 @@ public class GamePanel extends JPanel {
     hint_button.setAlignmentX(CENTER_ALIGNMENT);
     hint_button.setCursor(new Cursor(Cursor.HAND_CURSOR));
     hint_button.setVisible(true);
-    hint(hint_button, status_value, score_label);
+    hintAnswer(hint_button, status_value, score_label);
     add(hint_button);
 
     submit_button.addMouseListener(
@@ -239,7 +239,7 @@ public class GamePanel extends JPanel {
     );
   }
 
-  private void hint(
+  private void hintAnswer(
     JLabel hint_button,
     JLabel status_value,
     JLabel score_label
