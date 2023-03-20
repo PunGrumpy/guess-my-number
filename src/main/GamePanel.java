@@ -5,9 +5,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -154,15 +151,20 @@ public class GamePanel extends JPanel {
     score_label.setAlignmentX(CENTER_ALIGNMENT);
     add(score_label);
 
-    ImageIcon hintsIcon = new ImageIcon("asset/hints.png");
-    Image image = hintsIcon.getImage();
-    Image scaledImage = image.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
-    ImageIcon scaledImageIcon = new ImageIcon(scaledImage);
-    JLabel hints_button = new JLabel(scaledImageIcon);
-    hints_button.setBorder(new EmptyBorder(20, 0, 0, 10));
-    hints_button.setCursor(new Cursor(Cursor.HAND_CURSOR));
-    LinkHints(hints_button);
-    add(hints_button);
+    JLabel hint_button = new JLabel();
+    ImageIcon hintImage = new ImageIcon(getClass().getClassLoader().getResource("asset/hint.png"));
+    hint_button.setIcon(
+      new ImageIcon(hintImage.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH))
+      );
+    hint_button.setHorizontalTextPosition(JLabel.CENTER);
+    hint_button.setBorder(new EmptyBorder(20, 0, 0, 0));
+    hint_button.setForeground(ColorScheme.white);
+    hint_button.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
+    hint_button.setAlignmentX(CENTER_ALIGNMENT);
+    hint_button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    hint_button.setVisible(true);
+    hint(hint_button, status_value);
+    add(hint_button);
 
     submit_button.addMouseListener(
       new MouseAdapter() {
@@ -176,6 +178,7 @@ public class GamePanel extends JPanel {
             submit_button,
             continue_button,
             back_button,
+            hint_button,
             score_label
           );
         }
@@ -194,6 +197,7 @@ public class GamePanel extends JPanel {
             submit_button,
             continue_button,
             back_button,
+            hint_button,
             score_label
           );
         }
@@ -201,20 +205,27 @@ public class GamePanel extends JPanel {
     );
   }
 
-  private void LinkHints(JLabel hintsFrame) {
-    hintsFrame.addMouseListener(
+  private void hint(JLabel hint_button, JLabel status_value) {
+    hint_button.addMouseListener(
       new MouseAdapter() {
+        String hint = String.valueOf(Integer.toBinaryString(UNKNOW_NUMBER));
         @Override
         public void mouseClicked(MouseEvent e) {
-          String hintString = String.valueOf(
-            Integer.toBinaryString(UNKNOW_NUMBER)
-          );
-          JOptionPane.showConfirmDialog(
+          int dialogResult = JOptionPane.showConfirmDialog(
             null,
-            hintString,
-            "Hints",
-            JOptionPane.CLOSED_OPTION
+            "Are you sure you want to use a hint?\nYou will lose 1 score.",
+            "Warning",
+            JOptionPane.YES_NO_OPTION
           );
+          if (dialogResult == JOptionPane.YES_OPTION) {
+            if (SCORE >= 1) {
+              SCORE -= 1;
+              status_value.setText("I'll give you a hint: " + hint);
+              status_value.setFont(new Font(Font.DIALOG, Font.BOLD, 15));
+            } else {
+              status_value.setText("Not enough score!");
+            }
+          }
         }
       }
     );
@@ -258,6 +269,7 @@ public class GamePanel extends JPanel {
     JLabel submit_button,
     JLabel continue_button,
     JLabel back_button,
+    JLabel hint_button,
     JLabel score_label
   ) {
     if (guess_field.getText().equals("")) {
@@ -269,13 +281,7 @@ public class GamePanel extends JPanel {
 
     if (guess_field.getText().equals("cheat")) {
       status_value.setText("The answer is: " + UNKNOW_NUMBER);
-      // Copy to clipboard
-      StringSelection stringSelection = new StringSelection(
-        String.valueOf(UNKNOW_NUMBER)
-      );
-      Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-      clipboard.setContents(stringSelection, null);
-      guess_field.setText("");
+      guess_field.setText(String.valueOf(UNKNOW_NUMBER));
       return;
     }
 
@@ -285,21 +291,15 @@ public class GamePanel extends JPanel {
         getClass().getClassLoader().getResource("asset/correct.wav")
       );
       unknown_number.setText(String.valueOf(""));
-      Image originalImg = new ImageIcon(
+      ImageIcon suntanaImage = new ImageIcon(
         getClass().getClassLoader().getResource("asset/suntana.png")
-      )
-        .getImage();
-      Image resizedImg = originalImg.getScaledInstance(
-        200,
-        225,
-        Image.SCALE_SMOOTH
       );
-      unknown_number.setIcon(new ImageIcon(resizedImg));
-      unknown_number.setForeground(ColorScheme.gold);
+      unknown_number.setIcon(new ImageIcon(suntanaImage.getImage().getScaledInstance(200, 205, Image.SCALE_SMOOTH)));
       gridPanel.setVisible(false);
       submit_button.setVisible(false);
       continue_button.setVisible(true);
       back_button.setVisible(true);
+      hint_button.setVisible(false);
       SCORE++;
       score_label.setText(
         "Score: " + SCORE + "   🏆   High Score: " + HIGH_SCORE
@@ -346,6 +346,7 @@ public class GamePanel extends JPanel {
       submit_button.setVisible(false);
       continue_button.setVisible(true);
       back_button.setVisible(true);
+      hint_button.setVisible(false);
       SCORE++;
       score_label.setText(
         "Score: " + SCORE + "   🏆   High Score: " + HIGH_SCORE
