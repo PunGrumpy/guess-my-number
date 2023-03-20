@@ -209,42 +209,6 @@ public class GamePanel extends JPanel {
     );
   }
 
-  private void hint(
-    JLabel hint_button,
-    JLabel status_value,
-    JLabel score_label
-  ) {
-    hint_button.addMouseListener(
-      new MouseAdapter() {
-        String hint = String.valueOf(Integer.toBinaryString(UNKNOW_NUMBER));
-
-        @Override
-        public void mouseClicked(MouseEvent e) {
-          int dialogResult = JOptionPane.showConfirmDialog(
-            null,
-            "Are you sure you want to use a hint?\nYou will lose 1 score.",
-            "Warning",
-            JOptionPane.YES_NO_OPTION
-          );
-          if (dialogResult == JOptionPane.YES_OPTION) {
-            if (SCORE >= 1) {
-              SCORE--;
-              database.setScore(SCORE);
-              database.saveScore();
-              status_value.setText("I'll give you a hint: " + hint);
-              status_value.setFont(new Font(Font.DIALOG, Font.BOLD, 15));
-              score_label.setText(
-                "Score: " + SCORE + "   🏆   High Score: " + HIGH_SCORE
-              );
-            } else {
-              status_value.setText("Not enough score!");
-            }
-          }
-        }
-      }
-    );
-  }
-
   public void linkMenu(JLabel back_button) {
     back_button.addMouseListener(
       new MouseAdapter() {
@@ -270,6 +234,42 @@ public class GamePanel extends JPanel {
         @Override
         public void mouseClicked(MouseEvent e) {
           game.showView(new GamePanel(game));
+        }
+      }
+    );
+  }
+
+  private void hint(
+    JLabel HintButton,
+    JLabel StatusValue,
+    JLabel ScoreLabel
+  ) {
+    HintButton.addMouseListener(
+      new MouseAdapter() {
+        String hint = String.valueOf(Integer.toBinaryString(UNKNOW_NUMBER));
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+          int dialogResult = JOptionPane.showConfirmDialog(
+            null,
+            "Are you sure you want to use a hint?\nYou will lose 1 score.",
+            "Warning",
+            JOptionPane.YES_NO_OPTION
+          );
+          if (dialogResult == JOptionPane.YES_OPTION) {
+            if (SCORE >= 1) {
+              SCORE--;
+              database.setScore(SCORE);
+              database.saveScore();
+              StatusValue.setText("I'll give you a hint: " + hint);
+              StatusValue.setFont(new Font(Font.DIALOG, Font.BOLD, 15));
+              ScoreLabel.setText(
+                "Score: " + SCORE + "   🏆   High Score: " + HIGH_SCORE
+              );
+            } else {
+              StatusValue.setText("Not enough score!");
+            }
+          }
         }
       }
     );
