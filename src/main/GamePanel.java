@@ -167,7 +167,7 @@ public class GamePanel extends JPanel {
     hint_button.setAlignmentX(CENTER_ALIGNMENT);
     hint_button.setCursor(new Cursor(Cursor.HAND_CURSOR));
     hint_button.setVisible(true);
-    hint(hint_button, status_value);
+    hint(hint_button, status_value, score_label);
     add(hint_button);
 
     submit_button.addMouseListener(
@@ -209,7 +209,7 @@ public class GamePanel extends JPanel {
     );
   }
 
-  private void hint(JLabel hint_button, JLabel status_value) {
+  private void hint(JLabel hint_button, JLabel status_value, JLabel score_label) {
     hint_button.addMouseListener(
       new MouseAdapter() {
         String hint = String.valueOf(Integer.toBinaryString(UNKNOW_NUMBER));
@@ -224,9 +224,14 @@ public class GamePanel extends JPanel {
           );
           if (dialogResult == JOptionPane.YES_OPTION) {
             if (SCORE >= 1) {
-              SCORE -= 1;
+              SCORE--;
+              database.setScore(SCORE);
+              database.saveScore();
               status_value.setText("I'll give you a hint: " + hint);
               status_value.setFont(new Font(Font.DIALOG, Font.BOLD, 15));
+              score_label.setText(
+                "Score: " + SCORE + "   🏆   High Score: " + HIGH_SCORE
+              );
             } else {
               status_value.setText("Not enough score!");
             }
@@ -247,9 +252,6 @@ public class GamePanel extends JPanel {
             "Warning",
             JOptionPane.YES_NO_OPTION
           );
-          SCORE--;
-          database.setScore(SCORE);
-          database.saveScore();
           if (dialogResult == JOptionPane.YES_OPTION) {
             game.showView(new MenuPanel(game));
           }
