@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -144,6 +145,20 @@ public class GamePanel extends JPanel {
     score_label.setAlignmentX(CENTER_ALIGNMENT);
     add(score_label);
 
+    ImageIcon hintsIcon = new ImageIcon("asset/hints.png");
+    Image image = hintsIcon.getImage();
+    Image scaledImage = image.getScaledInstance(
+    25, 
+    25, 
+    Image.SCALE_SMOOTH
+    );
+    ImageIcon scaledImageIcon = new ImageIcon(scaledImage);
+    JLabel hints_button = new JLabel(scaledImageIcon);
+    hints_button.setBorder(new EmptyBorder(20, 0, 0, 10));
+    hints_button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    LinkHints(hints_button);
+    add(hints_button);
+
     submit_button.addMouseListener(
       new MouseAdapter() {
         @Override
@@ -179,6 +194,21 @@ public class GamePanel extends JPanel {
         }
       }
     );
+  }
+  
+  private void LinkHints(JLabel hintsFrame){
+    hintsFrame.addMouseListener(new MouseAdapter() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        String hintString = String.valueOf(Integer.toBinaryString(UNKNOW_NUMBER));
+        JOptionPane.showConfirmDialog(
+          null,
+          hintString,
+          "Hints",
+          JOptionPane.CLOSED_OPTION
+        );
+      }
+    });
   }
 
   public void linkMenu(JLabel back_button) {
