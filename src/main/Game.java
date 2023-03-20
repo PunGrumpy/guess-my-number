@@ -24,7 +24,11 @@ public class Game extends JFrame {
     showView(new MenuPanel(this));
     this.setVisible(true);
     this.pack();
-    this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("asset/icon.png")));
+    this.setIconImage(
+        Toolkit
+          .getDefaultToolkit()
+          .getImage(getClass().getClassLoader().getResource("asset/icon.png"))
+      );
     this.setResizable(false);
     this.setLocationRelativeTo(null);
   }
