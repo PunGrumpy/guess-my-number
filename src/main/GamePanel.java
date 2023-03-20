@@ -242,6 +242,9 @@ public class GamePanel extends JPanel {
             "Warning",
             JOptionPane.YES_NO_OPTION
           );
+          SCORE--;
+          database.setScore(SCORE);
+          database.saveScore();
           if (dialogResult == JOptionPane.YES_OPTION) {
             game.showView(new MenuPanel(game));
           }
