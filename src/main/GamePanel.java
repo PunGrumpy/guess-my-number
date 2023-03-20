@@ -226,7 +226,7 @@ public class GamePanel extends JPanel {
     status_value.setFont(new Font(Font.DIALOG, Font.BOLD, 25));
 
     if (guess_field.getText().equals("I love suntana")) {
-      status_value.setText("Please give we more grade");
+      status_value.setText("Please give me more grade");
       music.soundEffect("asset/correct.wav");
       unknown_number.setText(String.valueOf(""));
       Image originalImg = new ImageIcon("asset/suntana.png").getImage();
