@@ -4,6 +4,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -223,6 +224,35 @@ public class GamePanel extends JPanel {
     }
 
     status_value.setFont(new Font(Font.DIALOG, Font.BOLD, 25));
+
+    if (guess_field.getText().equals("I love suntana")) {
+      status_value.setText("Please give we more grade");
+      music.soundEffect("asset/correct.wav");
+      unknown_number.setText(String.valueOf(""));
+      Image originalImg = new ImageIcon("asset/suntana.png").getImage();
+      Image resizedImg = originalImg.getScaledInstance(
+        200,
+        225,
+        Image.SCALE_SMOOTH
+      );
+      unknown_number.setIcon(new ImageIcon(resizedImg));
+      unknown_number.setForeground(ColorScheme.gold);
+      gridPanel.setVisible(false);
+      submit_button.setVisible(false);
+      continue_button.setVisible(true);
+      back_button.setVisible(true);
+      SCORE++;
+      score_label.setText(
+        "Score: " + SCORE + "   🏆   High Score: " + HIGH_SCORE
+      );
+      database.setScore(SCORE);
+      database.saveScore();
+      if (SCORE > HIGH_SCORE) {
+        database.setHighScore(SCORE);
+        database.saveHighScore();
+      }
+      return;
+    }
 
     try {
       Integer.parseInt(guess_field.getText());
