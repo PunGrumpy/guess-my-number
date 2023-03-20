@@ -240,11 +240,11 @@ public class GamePanel extends JPanel {
   }
 
   private void hint(
-    JLabel HintButton,
-    JLabel StatusValue,
-    JLabel ScoreLabel
+    JLabel Hint_Button,
+    JLabel Status_Value,
+    JLabel Score_Label
   ) {
-    HintButton.addMouseListener(
+    Hint_Button.addMouseListener(
       new MouseAdapter() {
         String hint = String.valueOf(Integer.toBinaryString(UNKNOW_NUMBER));
 
@@ -261,13 +261,13 @@ public class GamePanel extends JPanel {
               SCORE--;
               database.setScore(SCORE);
               database.saveScore();
-              StatusValue.setText("I'll give you a hint: " + hint);
-              StatusValue.setFont(new Font(Font.DIALOG, Font.BOLD, 15));
-              ScoreLabel.setText(
+              Status_Value.setText("I'll give you a hint: " + hint);
+              Status_Value.setFont(new Font(Font.DIALOG, Font.BOLD, 15));
+              Score_Label.setText(
                 "Score: " + SCORE + "   🏆   High Score: " + HIGH_SCORE
               );
             } else {
-              StatusValue.setText("Not enough score!");
+              Status_Value.setText("Not enough score!");
             }
           }
         }
