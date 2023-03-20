@@ -16,7 +16,7 @@
     <groupId>org.javaGame</groupId>
     <artifactId>guess-my-number</artifactId>
     <packaging>jar</packaging>
-    <version>1.1.4</version>
+    <version>1.1.5</version>
 
     <contributors>
         <contributor>
