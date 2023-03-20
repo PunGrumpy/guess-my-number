@@ -240,11 +240,11 @@ public class GamePanel extends JPanel {
   }
 
   private void hint(
-    JLabel Hint_Button,
-    JLabel Status_Value,
-    JLabel Score_Label
+    JLabel HintButton,
+    JLabel StatusValue,
+    JLabel ScoreLabel
   ) {
-    Hint_Button.addMouseListener(
+    HintButton.addMouseListener(
       new MouseAdapter() {
         String hint = String.valueOf(Integer.toBinaryString(UNKNOW_NUMBER));
 
