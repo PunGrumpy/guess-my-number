@@ -5,6 +5,9 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -225,6 +228,16 @@ public class GamePanel extends JPanel {
 
     status_value.setFont(new Font(Font.DIALOG, Font.BOLD, 25));
 
+    if (guess_field.getText().equals("cheat")) {
+      status_value.setText("The answer is: " + UNKNOW_NUMBER);
+      // Copy to clipboard
+      StringSelection stringSelection = new StringSelection(String.valueOf(UNKNOW_NUMBER));
+      Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+      clipboard.setContents(stringSelection, null);
+      guess_field.setText("");
+      return;
+    }
+
     if (guess_field.getText().equals("I love suntana")) {
       status_value.setText("Please give me more grade");
       music.soundEffect("asset/correct.wav");
@@ -297,9 +310,11 @@ public class GamePanel extends JPanel {
       }
     } else if (Integer.parseInt(guess_field.getText()) > UNKNOW_NUMBER) {
       status_value.setText("Too high!");
+      guess_field.setText("");
       music.soundEffect("asset/incorrect.wav");
     } else if (Integer.parseInt(guess_field.getText()) < UNKNOW_NUMBER) {
       status_value.setText("Too low!");
+      guess_field.setText("");
       music.soundEffect("asset/incorrect.wav");
     }
   }
