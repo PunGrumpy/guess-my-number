@@ -73,7 +73,11 @@ public class GamePanel extends JPanel {
     add(subtitle);
 
     JLabel unknown_number = new JLabel("?");
-    unknown_number.setIcon(new ImageIcon("asset/question.png"));
+    unknown_number.setIcon(
+      new ImageIcon(
+        getClass().getClassLoader().getResource("asset/question.png")
+      )
+    );
     unknown_number.setHorizontalTextPosition(JLabel.CENTER);
     unknown_number.setForeground(ColorScheme.white);
     unknown_number.setFont(new Font(Font.DIALOG, Font.BOLD, 120));
@@ -104,7 +108,9 @@ public class GamePanel extends JPanel {
 
     JLabel submit_button = new JLabel("Submit");
     submit_button.setBorder(BorderFactory.createEmptyBorder(0, 15, 10, 0));
-    submit_button.setIcon(new ImageIcon("asset/submit.png"));
+    submit_button.setIcon(
+      new ImageIcon(getClass().getClassLoader().getResource("asset/submit.png"))
+    );
     submit_button.setHorizontalTextPosition(JLabel.CENTER);
     submit_button.setForeground(ColorScheme.white);
     submit_button.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
@@ -115,7 +121,9 @@ public class GamePanel extends JPanel {
     add(gridPanel);
 
     JLabel continue_button = new JLabel("Continue");
-    continue_button.setIcon(new ImageIcon("asset/button.png"));
+    continue_button.setIcon(
+      new ImageIcon(getClass().getClassLoader().getResource("asset/button.png"))
+    );
     continue_button.setHorizontalTextPosition(JLabel.CENTER);
     continue_button.setForeground(ColorScheme.white);
     continue_button.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
@@ -126,7 +134,9 @@ public class GamePanel extends JPanel {
     add(continue_button);
 
     JLabel back_button = new JLabel("Back");
-    back_button.setIcon(new ImageIcon("asset/button.png"));
+    back_button.setIcon(
+      new ImageIcon(getClass().getClassLoader().getResource("asset/button.png"))
+    );
     back_button.setHorizontalTextPosition(JLabel.CENTER);
     back_button.setForeground(ColorScheme.white);
     back_button.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
@@ -272,9 +282,14 @@ public class GamePanel extends JPanel {
 
     if (guess_field.getText().equals("I love suntana")) {
       status_value.setText("Please give me more grade");
-      music.soundEffect("asset/correct.wav");
+      music.soundEffect(
+        getClass().getClassLoader().getResource("asset/correct.wav")
+      );
       unknown_number.setText(String.valueOf(""));
-      Image originalImg = new ImageIcon("asset/suntana.png").getImage();
+      Image originalImg = new ImageIcon(
+        getClass().getClassLoader().getResource("asset/suntana.png")
+      )
+        .getImage();
       Image resizedImg = originalImg.getScaledInstance(
         200,
         225,
@@ -323,7 +338,9 @@ public class GamePanel extends JPanel {
 
     if (Integer.parseInt(guess_field.getText()) == UNKNOW_NUMBER) {
       status_value.setText("Correct! You win!");
-      music.soundEffect("asset/correct.wav");
+      music.soundEffect(
+        getClass().getClassLoader().getResource("asset/correct.wav")
+      );
       unknown_number.setText(String.valueOf("🏆"));
       unknown_number.setForeground(ColorScheme.gold);
       gridPanel.setVisible(false);
@@ -343,11 +360,15 @@ public class GamePanel extends JPanel {
     } else if (Integer.parseInt(guess_field.getText()) > UNKNOW_NUMBER) {
       status_value.setText("Too high!");
       guess_field.setText("");
-      music.soundEffect("asset/incorrect.wav");
+      music.soundEffect(
+        getClass().getClassLoader().getResource("asset/incorrect.wav")
+      );
     } else if (Integer.parseInt(guess_field.getText()) < UNKNOW_NUMBER) {
       status_value.setText("Too low!");
       guess_field.setText("");
-      music.soundEffect("asset/incorrect.wav");
+      music.soundEffect(
+        getClass().getClassLoader().getResource("asset/incorrect.wav")
+      );
     }
   }
 }
