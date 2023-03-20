@@ -152,10 +152,14 @@ public class GamePanel extends JPanel {
     add(score_label);
 
     JLabel hint_button = new JLabel();
-    ImageIcon hintImage = new ImageIcon(getClass().getClassLoader().getResource("asset/hint.png"));
+    ImageIcon hintImage = new ImageIcon(
+      getClass().getClassLoader().getResource("asset/hint.png")
+    );
     hint_button.setIcon(
-      new ImageIcon(hintImage.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH))
-      );
+      new ImageIcon(
+        hintImage.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH)
+      )
+    );
     hint_button.setHorizontalTextPosition(JLabel.CENTER);
     hint_button.setBorder(new EmptyBorder(20, 0, 0, 0));
     hint_button.setForeground(ColorScheme.white);
@@ -209,6 +213,7 @@ public class GamePanel extends JPanel {
     hint_button.addMouseListener(
       new MouseAdapter() {
         String hint = String.valueOf(Integer.toBinaryString(UNKNOW_NUMBER));
+
         @Override
         public void mouseClicked(MouseEvent e) {
           int dialogResult = JOptionPane.showConfirmDialog(
@@ -294,7 +299,13 @@ public class GamePanel extends JPanel {
       ImageIcon suntanaImage = new ImageIcon(
         getClass().getClassLoader().getResource("asset/suntana.png")
       );
-      unknown_number.setIcon(new ImageIcon(suntanaImage.getImage().getScaledInstance(200, 205, Image.SCALE_SMOOTH)));
+      unknown_number.setIcon(
+        new ImageIcon(
+          suntanaImage
+            .getImage()
+            .getScaledInstance(200, 205, Image.SCALE_SMOOTH)
+        )
+      );
       gridPanel.setVisible(false);
       submit_button.setVisible(false);
       continue_button.setVisible(true);
