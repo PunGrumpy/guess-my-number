@@ -92,7 +92,7 @@ public class MenuPanel extends JPanel {
     super.paintComponent(g);
     g.drawImage(
       new ImageIcon(
-        getClass().getClassLoader().getResource("asset/background.png")
+        getClass().getClassLoader().getResource("asset/background_menu.png")
       )
         .getImage(),
       0,

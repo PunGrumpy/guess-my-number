@@ -3,6 +3,7 @@ package main;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -41,7 +42,7 @@ public class GamePanel extends JPanel {
     RANGE_NUMBER = randomNumber.GET_RANGE_NUMBER();
 
     this.game = game;
-    this.setBackground(ColorScheme.indigo);
+    // this.setBackground(ColorScheme.indigo);
 
     SCORE = database.showScore();
     HIGH_SCORE = database.showHighScore();
@@ -394,5 +395,21 @@ public class GamePanel extends JPanel {
         getClass().getClassLoader().getResource("asset/incorrect.wav")
       );
     }
+  }
+
+  @Override
+  protected void paintComponent(Graphics g) {
+    super.paintComponent(g);
+    g.drawImage(
+      new ImageIcon(
+        getClass().getClassLoader().getResource("asset/background_game.png")
+      )
+        .getImage(),
+      0,
+      0,
+      getWidth(),
+      getHeight(),
+      null
+    );
   }
 }
