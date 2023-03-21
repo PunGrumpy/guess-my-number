@@ -42,7 +42,6 @@ public class GamePanel extends JPanel {
     RANGE_NUMBER = randomNumber.GET_RANGE_NUMBER();
 
     this.game = game;
-    // this.setBackground(ColorScheme.indigo);
 
     SCORE = database.showScore();
     HIGH_SCORE = database.showHighScore();
