@@ -11,7 +11,8 @@
 
 ## Demo 🎥
 
-![Demo](./.github/image/demo.mp4)
+https://user-images.githubusercontent.com/108584943/226547755-77fbe17e-6d58-4c11-a0e4-310a9e97ca87.mp4
+
 
 ## Table of contents
 
