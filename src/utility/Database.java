@@ -20,16 +20,18 @@ public class Database {
       if (!file.exists()) {
         file.getParentFile().mkdirs();
         file.createNewFile();
+        file.setReadable(false, true);
       }
     } catch (Exception e) {
       System.out.println("Error: " + e);
     }
-
+    
     try {
       File file = new File("data/highScore.dat");
       if (!file.exists()) {
         file.getParentFile().mkdirs();
         file.createNewFile();
+        file.setReadable(false, true);
       }
     } catch (Exception e) {
       System.out.println("Error: " + e);
