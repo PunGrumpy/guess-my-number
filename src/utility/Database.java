@@ -25,7 +25,7 @@ public class Database {
     } catch (Exception e) {
       System.out.println("Error: " + e);
     }
-    
+
     try {
       File file = new File("data/highScore.dat");
       if (!file.exists()) {
