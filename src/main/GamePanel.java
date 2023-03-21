@@ -270,7 +270,13 @@ public class GamePanel extends JPanel {
         @Override
         public void mouseClicked(MouseEvent e) {
           try {
-            java.awt.Desktop.getDesktop().browse(new java.net.URI("https://github.com/PunGrumpy/guess-my-number/tree/main"));
+            java.awt.Desktop
+              .getDesktop()
+              .browse(
+                new java.net.URI(
+                  "https://github.com/PunGrumpy/guess-my-number/tree/main"
+                )
+              );
           } catch (java.io.IOException | java.net.URISyntaxException ex) {
             ex.printStackTrace();
           }
