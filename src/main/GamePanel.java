@@ -208,6 +208,7 @@ public class GamePanel extends JPanel {
             continue_button,
             back_button,
             hint_button,
+            source_code,
             score_label
           );
         }
@@ -227,6 +228,7 @@ public class GamePanel extends JPanel {
             continue_button,
             back_button,
             hint_button,
+            source_code,
             score_label
           );
         }
@@ -330,6 +332,7 @@ public class GamePanel extends JPanel {
     JLabel continue_button,
     JLabel back_button,
     JLabel hint_button,
+    JLabel source_code,
     JLabel score_label
   ) {
     if (guess_field.getText().equals("")) {
@@ -366,6 +369,7 @@ public class GamePanel extends JPanel {
       continue_button.setVisible(true);
       back_button.setVisible(true);
       hint_button.setVisible(false);
+      source_code.setVisible(false);
       SCORE++;
       score_label.setText(
         "Score: " + SCORE + "   🏆   High Score: " + HIGH_SCORE
@@ -415,6 +419,7 @@ public class GamePanel extends JPanel {
       continue_button.setVisible(true);
       back_button.setVisible(true);
       hint_button.setVisible(false);
+      source_code.setVisible(false);
       SCORE++;
       score_label.setText(
         "Score: " + SCORE + "   🏆   High Score: " + HIGH_SCORE
