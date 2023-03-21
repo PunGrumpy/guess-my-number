@@ -9,6 +9,10 @@
 
 ![Repobeats analytics image](https://repobeats.axiom.co/api/embed/a8fecf15d3b803f8b30d2e0d36d9e31034d23a6f.svg)
 
+## Demo 🎥
+
+![Demo](./.github/image/demo.mp4)
+
 ## Table of contents
 
 ```bash
