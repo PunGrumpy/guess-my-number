@@ -26,7 +26,7 @@ public class Music {
     } catch (
       UnsupportedAudioFileException | LineUnavailableException | IOException e
     ) {
-      System.out.printf("Error: %s%n", e);
+      e.printStackTrace();
     }
   }
 }
