@@ -110,6 +110,7 @@ public class GamePanel extends JPanel {
       new ImageIcon(getClass().getClassLoader().getResource("asset/submit.png"))
     );
     submit_button.setHorizontalTextPosition(SwingConstants.CENTER);
+    submit_button.setAlignmentX(CENTER_ALIGNMENT);
     submit_button.setForeground(ColorScheme.white);
     submit_button.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     submit_button.setAlignmentX(CENTER_ALIGNMENT);
