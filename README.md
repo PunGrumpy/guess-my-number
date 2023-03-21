@@ -56,9 +56,10 @@ git push origin <branch-name>
 ### Java
 
 ```bash
-# How to run the game for development
-javac -d ./bin **/*.java
-java --enable-preview -XX:+ShowCodeDetailsInExceptionMessages -cp ./src/bin main.MainClass
+# Use VSCode to run the program
+# 1. Open the project in VSCode
+# 2. Click on the "Run" tab
+# 3. Click on the "Run without debugging" button
 ```
 
 ### Maven
