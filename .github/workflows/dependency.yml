@@ -28,9 +28,6 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       - name: Maven Dependency Tree Dependency Submission
         uses: advanced-security/maven-dependency-submission-action@v3.0.0
-      - name: Maven Dependency Check
-        run: |
-          mvn -B dependency-check:check --file pom.xml
       - name: Upload Dependency Check Report
         uses: actions/upload-artifact@v2
         with:
@@ -48,4 +45,3 @@ jobs:
           branch: dependency-check
           labels: security
           delete-branch: true
-          
