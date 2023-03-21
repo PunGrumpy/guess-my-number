@@ -87,11 +87,11 @@ public class GamePanel extends JPanel {
     status_value.setAlignmentX(CENTER_ALIGNMENT);
     add(status_value);
 
-    JPanel gridPanel = new JPanel();
-    gridPanel.setMaximumSize(new Dimension(260, 50));
-    gridPanel.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
-    gridPanel.setLayout(new GridLayout(0, 2));
-    gridPanel.setOpaque(false);
+    JPanel gridPlayPanel = new JPanel();
+    gridPlayPanel.setMaximumSize(new Dimension(260, 50));
+    gridPlayPanel.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
+    gridPlayPanel.setLayout(new GridLayout(0, 2));
+    gridPlayPanel.setOpaque(false);
 
     JTextField guess_field = new JTextField();
     guess_field.setTransferHandler(null);
@@ -100,7 +100,7 @@ public class GamePanel extends JPanel {
     guess_field.setForeground(ColorScheme.indigo);
     guess_field.setHorizontalAlignment(SwingConstants.CENTER);
     guess_field.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
-    gridPanel.add(guess_field);
+    gridPlayPanel.add(guess_field);
 
     JLabel submit_button = new JLabel("Submit");
     submit_button.setBorder(BorderFactory.createEmptyBorder(0, 15, 10, 0));
@@ -113,9 +113,9 @@ public class GamePanel extends JPanel {
     submit_button.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
     submit_button.setAlignmentX(CENTER_ALIGNMENT);
     submit_button.setCursor(new Cursor(Cursor.HAND_CURSOR));
-    gridPanel.add(submit_button);
+    gridPlayPanel.add(submit_button);
 
-    add(gridPanel);
+    add(gridPlayPanel);
 
     JLabel continue_button = new JLabel("Continue");
     continue_button.setIcon(
@@ -200,7 +200,7 @@ public class GamePanel extends JPanel {
         @Override
         public void mouseClicked(MouseEvent e) {
           changeStatusValue(
-            gridPanel,
+            gridPlayPanel,
             status_value,
             guess_field,
             unknown_number,
@@ -219,7 +219,7 @@ public class GamePanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
           changeStatusValue(
-            gridPanel,
+            gridPlayPanel,
             status_value,
             guess_field,
             unknown_number,
@@ -322,7 +322,7 @@ public class GamePanel extends JPanel {
   }
 
   private void changeStatusValue(
-    JPanel gridPanel,
+    JPanel gridPlayPanel,
     JLabel status_value,
     JTextField guess_field,
     JLabel unknown_number,
@@ -361,7 +361,7 @@ public class GamePanel extends JPanel {
             .getScaledInstance(200, 205, Image.SCALE_SMOOTH)
         )
       );
-      gridPanel.setVisible(false);
+      gridPlayPanel.setVisible(false);
       submit_button.setVisible(false);
       continue_button.setVisible(true);
       back_button.setVisible(true);
@@ -410,7 +410,7 @@ public class GamePanel extends JPanel {
       );
       unknown_number.setText(String.valueOf("🏆"));
       unknown_number.setForeground(ColorScheme.gold);
-      gridPanel.setVisible(false);
+      gridPlayPanel.setVisible(false);
       submit_button.setVisible(false);
       continue_button.setVisible(true);
       back_button.setVisible(true);
