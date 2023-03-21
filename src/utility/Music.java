@@ -24,7 +24,10 @@ public class Music {
       gainControl.setValue(-20.0f);
       clip.start();
     } catch (
-      UnsupportedAudioFileException | LineUnavailableException | NullPointerException |IOException e
+      UnsupportedAudioFileException
+      | LineUnavailableException
+      | NullPointerException
+      | IOException e
     ) {
       e.printStackTrace();
     }
