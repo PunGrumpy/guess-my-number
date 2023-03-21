@@ -28,4 +28,9 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       - name: Maven Dependency Tree Dependency Submission
         uses: advanced-security/maven-dependency-submission-action@v3.0.0
-        
+      - name: Maven Dependency Tree Dependency Check Version
+        run: |
+          maven-dependency-submission --version
+      - name: Maven Dependency Tree Dependency Check
+        run: |
+          maven-dependency-submission --project-name "Maven Dependency Check" --project-version "1.1.8" --project-description "Maven Dependency Check" --project-url "
