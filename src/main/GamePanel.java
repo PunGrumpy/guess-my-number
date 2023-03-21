@@ -53,8 +53,6 @@ public class GamePanel extends JPanel {
   }
 
   private void Render() {
-    JPanel gridPanel;
-
     JLabel title = new JLabel("Random The Number");
     title.setForeground(ColorScheme.white);
     title.setFont(new Font(Font.DIALOG, Font.BOLD, 30));
@@ -89,7 +87,7 @@ public class GamePanel extends JPanel {
     status_value.setAlignmentX(CENTER_ALIGNMENT);
     add(status_value);
 
-    gridPanel = new JPanel();
+    JPanel gridPanel = new JPanel();
     gridPanel.setMaximumSize(new Dimension(260, 50));
     gridPanel.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
     gridPanel.setLayout(new GridLayout(0, 2));
@@ -154,6 +152,13 @@ public class GamePanel extends JPanel {
     score_label.setAlignmentX(CENTER_ALIGNMENT);
     add(score_label);
 
+    JPanel gridBottomPanel = new JPanel();
+    gridBottomPanel.setMaximumSize(new Dimension(260, 50));
+    gridBottomPanel.setAlignmentX(CENTER_ALIGNMENT);
+    gridBottomPanel.setBorder(BorderFactory.createEmptyBorder(20, 78, 0, 23));
+    gridBottomPanel.setLayout(new GridLayout(0, 2));
+    gridBottomPanel.setOpaque(false);
+
     JLabel hint_button = new JLabel();
     ImageIcon hintImage = new ImageIcon(
       getClass().getClassLoader().getResource("asset/hint.png")
@@ -164,14 +169,31 @@ public class GamePanel extends JPanel {
       )
     );
     hint_button.setHorizontalTextPosition(SwingConstants.CENTER);
-    hint_button.setBorder(new EmptyBorder(20, 0, 0, 0));
     hint_button.setForeground(ColorScheme.white);
     hint_button.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
-    hint_button.setAlignmentX(CENTER_ALIGNMENT);
     hint_button.setCursor(new Cursor(Cursor.HAND_CURSOR));
     hint_button.setVisible(true);
     hintAnswer(hint_button, status_value, score_label);
-    add(hint_button);
+    gridBottomPanel.add(hint_button);
+
+    JLabel source_code = new JLabel();
+    ImageIcon sourceImage = new ImageIcon(
+      getClass().getClassLoader().getResource("asset/github.png")
+    );
+    source_code.setIcon(
+      new ImageIcon(
+        sourceImage.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH)
+      )
+    );
+    source_code.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    source_code.setHorizontalTextPosition(SwingConstants.CENTER);
+    source_code.setForeground(ColorScheme.white);
+    source_code.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
+    source_code.setVisible(true);
+    sourceCode(source_code);
+    gridBottomPanel.add(source_code);
+
+    add(gridBottomPanel);
 
     submit_button.addMouseListener(
       new MouseAdapter() {
@@ -237,6 +259,21 @@ public class GamePanel extends JPanel {
         @Override
         public void mouseClicked(MouseEvent e) {
           game.showView(new GamePanel(game));
+        }
+      }
+    );
+  }
+
+  private void sourceCode(JLabel source_code) {
+    source_code.addMouseListener(
+      new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+          try {
+            java.awt.Desktop.getDesktop().browse(new java.net.URI("https://github.com/PunGrumpy/guess-my-number/tree/main"));
+          } catch (java.io.IOException | java.net.URISyntaxException ex) {
+            ex.printStackTrace();
+          }
         }
       }
     );
