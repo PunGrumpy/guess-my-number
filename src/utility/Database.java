@@ -6,6 +6,8 @@ import java.util.Scanner;
 public class Database {
 
   private int score, highScore;
+  private String scoreFile = "data/SCORE.dat";
+  private String highScoreFile = "data/HIGH_SCORE.dat";
 
   public Database() {
     createFile();
@@ -16,7 +18,7 @@ public class Database {
 
   private void createFile() {
     try {
-      File file = new File("data/score.dat");
+      File file = new File(scoreFile);
       if (!file.exists()) {
         file.getParentFile().mkdirs();
         file.createNewFile();
@@ -27,7 +29,7 @@ public class Database {
     }
 
     try {
-      File file = new File("data/highScore.dat");
+      File file = new File(highScoreFile);
       if (!file.exists()) {
         file.getParentFile().mkdirs();
         file.createNewFile();
@@ -40,7 +42,7 @@ public class Database {
 
   private void isFileEmpty() {
     try {
-      File file = new File("data/score.dat");
+      File file = new File(scoreFile);
       Scanner scan = new Scanner(file);
       if (!scan.hasNextInt()) {
         setDefault();
@@ -53,7 +55,7 @@ public class Database {
 
   private void setDefault() {
     try {
-      File file = new File("data/score.dat");
+      File file = new File(scoreFile);
       Scanner scan = new Scanner(file);
       if (!scan.hasNextInt()) {
         score = 0;
@@ -65,7 +67,7 @@ public class Database {
     }
 
     try {
-      File file = new File("data/highScore.dat");
+      File file = new File(highScoreFile);
       Scanner scan = new Scanner(file);
       if (!scan.hasNextInt()) {
         highScore = 0;
@@ -87,7 +89,7 @@ public class Database {
 
   public int showScore() {
     try {
-      File file = new File("data/score.dat");
+      File file = new File(scoreFile);
       Scanner scan = new Scanner(file);
       score = scan.nextInt();
       scan.close();
@@ -100,7 +102,7 @@ public class Database {
 
   public int showHighScore() {
     try {
-      File file = new File("data/highScore.dat");
+      File file = new File(highScoreFile);
       Scanner scan = new Scanner(file);
       highScore = scan.nextInt();
       scan.close();
@@ -113,7 +115,7 @@ public class Database {
 
   public void saveScore() {
     try {
-      File file = new File("data/score.dat");
+      File file = new File(scoreFile);
       java.io.PrintWriter output = new java.io.PrintWriter(file);
       output.println(score);
       output.close();
@@ -124,7 +126,7 @@ public class Database {
 
   public void saveHighScore() {
     try {
-      File file = new File("data/highScore.dat");
+      File file = new File(highScoreFile);
       java.io.PrintWriter output = new java.io.PrintWriter(file);
       output.println(highScore);
       output.close();
