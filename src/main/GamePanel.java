@@ -96,6 +96,7 @@ public class GamePanel extends JPanel {
     gridPanel.setOpaque(false);
 
     JTextField guess_field = new JTextField();
+    guess_field.setTransferHandler(null);
     guess_field.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
     guess_field.setBackground(ColorScheme.white);
     guess_field.setForeground(ColorScheme.indigo);
@@ -381,13 +382,13 @@ public class GamePanel extends JPanel {
         database.saveHighScore();
       }
     } else if (Integer.parseInt(guess_field.getText()) > UNKNOW_NUMBER) {
-      status_value.setText("Too high!");
+      status_value.setText(guess_field.getText() + " is too high!");
       guess_field.setText("");
       music.soundEffect(
         getClass().getClassLoader().getResource("asset/incorrect.wav")
       );
     } else if (Integer.parseInt(guess_field.getText()) < UNKNOW_NUMBER) {
-      status_value.setText("Too low!");
+      status_value.setText(guess_field.getText() + " is too low!");
       guess_field.setText("");
       music.soundEffect(
         getClass().getClassLoader().getResource("asset/incorrect.wav")
