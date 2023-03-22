@@ -13,6 +13,53 @@
 
 https://user-images.githubusercontent.com/108584943/226547755-77fbe17e-6d58-4c11-a0e4-310a9e97ca87.mp4
 
+<details>
+    <summary>Click to see image</summary>
+    <img src="./.github/docs/demo_1.png" alt="demo_1" width="100%">
+    <img src="./.github/docs/demo_2.png" alt="demo_2" width="100%">
+    <img src="./.github/docs/demo_3.png" alt="demo_3" width="100%">
+    <img src="./.github/docs/demo_4.png" alt="demo_4" width="100%">
+    <img src="./.github/docs/demo_5.png" alt="demo_5" width="100%">
+</details>
+
+## About the project 📖
+
+This is a simple game that you have to guess the number that the computer has chosen. The computer will give you a hint whether the number you have chosen is higher or lower than the number that the computer has chosen. The game will end when you guess the number correctly.
+
+## Author 🙋‍♂️
+
+- [Teachin Pongmanee (NongFeen)](https://github.com/NongFeen)
+- [Teeradon Numthong (custapq)](https://github.com/custapq)
+- [Noppakorn Kaewsalabnil (PunGrumpy)](https://github.com/PunGrumpy)
+
+## Features 📌
+
+- [x] Guess the number that the computer has chosen
+- [x] The computer will give you a hint whether the number you have chosen is higher or lower than the number that the computer has chosen
+- [x] Hint will be given in the form of a binary number
+- [x] The game will end when you guess the number correctly
+- [x] Easter egg for fun
+
+<details>
+    <summary>Click to see Easter egg</summary>
+    <h2>The easter egg fill in guess field</h2>
+    <ul>
+        <li>
+            <h3><b>cheat</b></h3>
+            <p>For see answer</p>
+        </li>
+        <li>
+            <h3><b>I love suntana<b></h3>
+            <p>For show teacher picture and then you win</p>
+        </li>
+    </ul>
+</details>
+
+## Built with 🛠
+
+- [Java](https://www.java.com/en/) - Programming language
+- [Maven](https://maven.apache.org/) - Dependency management
+- [GitHub Actions](https://github.com/features/actions) - CI/CD
 
 ## Table of contents
 
@@ -28,49 +75,31 @@ https://user-images.githubusercontent.com/108584943/226547755-77fbe17e-6d58-4c11
 └─── README.md
 ```
 
-## TIPs
+## Pre-requires 📋
 
-### Git
+- [Java 17](https://www.oracle.com/java/technologies/downloads/#java17) or higher
+- [Maven 3.9.1](https://maven.apache.org/download.cgi) or higher
 
-```bash
-# How to clone a repository
-git clone https://github.com/PunGrumpy/java-game.git
-
-# How to create a new branch
-git checkout -b <branch-name> # recommended branch name: feat/<your-name>, bug/<your-name>, etc.
-
-# How to add a file to the staging area
-git add <file-name>
-
-# How to commit changes
-git commit -m "<commit-message>"
-
-# How to push changes to the remote repository
-git push origin <branch-name>
-
-# How to create a pull request
-# 1. Go to the repository
-# 2. Click on the "Pull requests" tab
-# 3. Click on the "New pull request" button
-# 4. Select the branch you want to merge into the main branch
-# 5. Click on the "Create pull request" button
-# 6. Add a title and description to your pull request
-# 7. Click on the "Create pull request" button
-```
-
-### Java
+## Installation 🔧
 
 ```bash
-# Use VSCode to run the program
-# 1. Open the project in VSCode
-# 2. Click on the "Run" tab
-# 3. Click on the "Run without debugging" button
-```
+# Clone the repository
+git clone https://github.com/PunGrumpy/guess-my-number.git
 
-### Maven
+# Go to the project directory
+cd guess-my-number
 
-```bash
-# How to build jar file
-mvn compile
+# Build the project
 mvn clean package
+
+# Run the program
+java -jar target/guess-my-number-[version].jar
 ```
+
+## Contributing 🤝
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feat/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feat/AmazingFeature`)
+5. Open a pull request

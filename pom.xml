@@ -13,7 +13,7 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
-    <groupId>org.javaGame</groupId>
+    <groupId>com.game.guess-my-number</groupId>
     <artifactId>guess-my-number</artifactId>
     <packaging>jar</packaging>
     <version>1.1.9</version>
@@ -54,6 +54,18 @@
             </resource>
         </resources>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.game.guess-my-number</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
