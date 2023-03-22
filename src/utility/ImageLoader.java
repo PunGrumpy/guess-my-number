@@ -10,7 +10,7 @@ public class ImageLoader {
     try {
       imageUrl = getClass().getClassLoader().getResource(path);
     } catch (Exception e) {
-      e.printStackTrace();
+      // e.printStackTrace(); // Make sure this debug feature is deactivated before delivering the code in production.
     }
   }
 
