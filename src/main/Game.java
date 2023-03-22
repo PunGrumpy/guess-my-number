@@ -6,16 +6,21 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+import utility.ImageLoader;
 
 public class Game extends JFrame {
 
   private final int WIDTH = 360;
   private final int HEIGHT = WIDTH * 2;
 
+  private transient ImageLoader imageLoader;
+
   protected JFrame jframe;
   protected JPanel viewPanel;
 
   public Game() {
+    imageLoader = new ImageLoader();
+
     viewPanel = new JPanel(new BorderLayout());
     this.setTitle("Guess My Number 🔮");
     this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -27,7 +32,7 @@ public class Game extends JFrame {
     this.setIconImage(
         Toolkit
           .getDefaultToolkit()
-          .getImage(getClass().getClassLoader().getResource("asset/icon.png"))
+          .getImage(imageLoader.getImageUrl("images/icon.png"))
       );
     this.setResizable(false);
     this.setLocationRelativeTo(null);

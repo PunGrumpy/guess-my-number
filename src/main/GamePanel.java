@@ -21,23 +21,30 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import utility.ColorScheme;
 import utility.Database;
+import utility.ImageLoader;
 import utility.Music;
 import utility.RandomNumber;
+import utility.SoundLoader;
 
 public class GamePanel extends JPanel {
 
   private final Game game;
 
-  private Database database;
-  private RandomNumber randomNumber;
-  private Music music = new Music();
+  private transient Music music;
+  private transient Database database;
+  private transient RandomNumber randomNumber;
+  private transient ImageLoader imageLoader;
+  private transient SoundLoader soundLoader;
 
   private int SCORE, HIGH_SCORE;
   private int UNKNOW_NUMBER, RANGE_NUMBER;
 
   public GamePanel(Game game) {
+    music = new Music();
     database = new Database();
     randomNumber = new RandomNumber();
+    imageLoader = new ImageLoader();
+    soundLoader = new SoundLoader();
     UNKNOW_NUMBER = randomNumber.GET_RANDOM_NUMBER();
     RANGE_NUMBER = randomNumber.GET_RANGE_NUMBER();
 
@@ -69,9 +76,7 @@ public class GamePanel extends JPanel {
 
     JLabel unknown_number = new JLabel("?");
     unknown_number.setIcon(
-      new ImageIcon(
-        getClass().getClassLoader().getResource("asset/question.png")
-      )
+      new ImageIcon(imageLoader.getImageUrl("asset/question.png"))
     );
     unknown_number.setHorizontalTextPosition(SwingConstants.CENTER);
     unknown_number.setForeground(ColorScheme.white);
@@ -105,7 +110,7 @@ public class GamePanel extends JPanel {
     JLabel submit_button = new JLabel("Submit");
     submit_button.setBorder(BorderFactory.createEmptyBorder(0, 15, 10, 0));
     submit_button.setIcon(
-      new ImageIcon(getClass().getClassLoader().getResource("asset/submit.png"))
+      new ImageIcon(imageLoader.getImageUrl("asset/submit.png"))
     );
     submit_button.setHorizontalTextPosition(SwingConstants.CENTER);
     submit_button.setAlignmentX(CENTER_ALIGNMENT);
@@ -119,7 +124,7 @@ public class GamePanel extends JPanel {
 
     JLabel continue_button = new JLabel("Continue");
     continue_button.setIcon(
-      new ImageIcon(getClass().getClassLoader().getResource("asset/button.png"))
+      new ImageIcon(imageLoader.getImageUrl("asset/button.png"))
     );
     continue_button.setHorizontalTextPosition(SwingConstants.CENTER);
     continue_button.setForeground(ColorScheme.white);
@@ -132,7 +137,7 @@ public class GamePanel extends JPanel {
 
     JLabel back_button = new JLabel("Back");
     back_button.setIcon(
-      new ImageIcon(getClass().getClassLoader().getResource("asset/button.png"))
+      new ImageIcon(imageLoader.getImageUrl("asset/button.png"))
     );
     back_button.setHorizontalTextPosition(SwingConstants.CENTER);
     back_button.setForeground(ColorScheme.white);
@@ -161,7 +166,7 @@ public class GamePanel extends JPanel {
 
     JLabel hint_button = new JLabel();
     ImageIcon hintImage = new ImageIcon(
-      getClass().getClassLoader().getResource("asset/hint.png")
+      imageLoader.getImageUrl("asset/hint.png")
     );
     hint_button.setIcon(
       new ImageIcon(
@@ -178,7 +183,7 @@ public class GamePanel extends JPanel {
 
     JLabel source_code = new JLabel();
     ImageIcon sourceImage = new ImageIcon(
-      getClass().getClassLoader().getResource("asset/github.png")
+      imageLoader.getImageUrl("asset/github.png")
     );
     source_code.setIcon(
       new ImageIcon(
@@ -275,9 +280,7 @@ public class GamePanel extends JPanel {
             java.awt.Desktop
               .getDesktop()
               .browse(
-                new java.net.URI(
-                  "https://github.com/PunGrumpy/guess-my-number/tree/main"
-                )
+                new java.net.URI("https://github.com/PunGrumpy/guess-my-number")
               );
           } catch (java.io.IOException | java.net.URISyntaxException ex) {
             ex.printStackTrace();
@@ -355,7 +358,7 @@ public class GamePanel extends JPanel {
       );
       unknown_number.setText(String.valueOf(""));
       ImageIcon suntanaImage = new ImageIcon(
-        getClass().getClassLoader().getResource("asset/suntana.png")
+        imageLoader.getImageUrl("asset/suntana.png")
       );
       unknown_number.setIcon(
         new ImageIcon(
@@ -409,9 +412,7 @@ public class GamePanel extends JPanel {
 
     if (Integer.parseInt(guess_field.getText()) == UNKNOW_NUMBER) {
       status_value.setText("Correct! You win!");
-      music.soundEffect(
-        getClass().getClassLoader().getResource("asset/correct.wav")
-      );
+      music.soundEffect(soundLoader.getSoundUrl("asset/correct.wav"));
       unknown_number.setText(String.valueOf("🏆"));
       unknown_number.setForeground(ColorScheme.gold);
       gridPlayPanel.setVisible(false);
@@ -433,15 +434,11 @@ public class GamePanel extends JPanel {
     } else if (Integer.parseInt(guess_field.getText()) > UNKNOW_NUMBER) {
       status_value.setText(guess_field.getText() + " is too high!");
       guess_field.setText("");
-      music.soundEffect(
-        getClass().getClassLoader().getResource("asset/incorrect.wav")
-      );
+      music.soundEffect(soundLoader.getSoundUrl("asset/incorrect.wav"));
     } else if (Integer.parseInt(guess_field.getText()) < UNKNOW_NUMBER) {
       status_value.setText(guess_field.getText() + " is too low!");
       guess_field.setText("");
-      music.soundEffect(
-        getClass().getClassLoader().getResource("asset/incorrect.wav")
-      );
+      music.soundEffect(soundLoader.getSoundUrl("asset/incorrect.wav"));
     }
   }
 
@@ -449,9 +446,7 @@ public class GamePanel extends JPanel {
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
     g.drawImage(
-      new ImageIcon(
-        getClass().getClassLoader().getResource("asset/background_game.png")
-      )
+      new ImageIcon(imageLoader.getImageUrl("asset/background_game.png"))
         .getImage(),
       0,
       0,

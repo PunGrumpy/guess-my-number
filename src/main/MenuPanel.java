@@ -12,15 +12,18 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import utility.ColorScheme;
 import utility.Database;
+import utility.ImageLoader;
 
 public class MenuPanel extends JPanel {
 
   private final Game game;
 
-  private Database database;
+  private transient Database database;
+  private transient ImageLoader imageLoader;
 
   public MenuPanel(Game game) {
     database = new Database();
+    imageLoader = new ImageLoader();
 
     this.game = game;
 
@@ -61,7 +64,7 @@ public class MenuPanel extends JPanel {
     add(highest_score);
 
     JLabel play_button = new JLabel(
-      new ImageIcon(getClass().getClassLoader().getResource("asset/play.png"))
+      new ImageIcon(imageLoader.getImageUrl("asset/play.png"))
     );
     play_button.setBorder(new EmptyBorder(35, 0, 0, 0));
     play_button.setAlignmentX(CENTER_ALIGNMENT);
@@ -91,9 +94,7 @@ public class MenuPanel extends JPanel {
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
     g.drawImage(
-      new ImageIcon(
-        getClass().getClassLoader().getResource("asset/background_menu.png")
-      )
+      new ImageIcon(imageLoader.getImageUrl("asset/background_menu.png"))
         .getImage(),
       0,
       0,
