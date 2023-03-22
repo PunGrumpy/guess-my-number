@@ -9,7 +9,7 @@ import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-public class Music {
+public class Sound {
 
   public void soundEffect(URL soundName) {
     try {

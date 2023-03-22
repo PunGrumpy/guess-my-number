@@ -22,7 +22,7 @@ import javax.swing.border.EmptyBorder;
 import utility.ColorScheme;
 import utility.Database;
 import utility.ImageLoader;
-import utility.Music;
+import utility.Sound;
 import utility.RandomNumber;
 import utility.SoundLoader;
 
@@ -30,7 +30,7 @@ public class GamePanel extends JPanel {
 
   private final Game game;
 
-  private transient Music music;
+  private transient Sound music;
   private transient Database database;
   private transient RandomNumber randomNumber;
   private transient ImageLoader imageLoader;
@@ -40,7 +40,7 @@ public class GamePanel extends JPanel {
   private int UNKNOW_NUMBER, RANGE_NUMBER;
 
   public GamePanel(Game game) {
-    music = new Music();
+    music = new Sound();
     database = new Database();
     randomNumber = new RandomNumber();
     imageLoader = new ImageLoader();
