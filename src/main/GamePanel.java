@@ -22,8 +22,8 @@ import javax.swing.border.EmptyBorder;
 import utility.ColorScheme;
 import utility.Database;
 import utility.ImageLoader;
-import utility.Sound;
 import utility.RandomNumber;
+import utility.Sound;
 import utility.SoundLoader;
 
 public class GamePanel extends JPanel {
