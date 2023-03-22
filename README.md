@@ -11,7 +11,7 @@
 
 ## Demo 🎥
 
-https://user-images.githubusercontent.com/108584943/226547755-77fbe17e-6d58-4c11-a0e4-310a9e97ca87.mp4
+[![Guess My Number Video](./.github/docs/guess-my-number-embed.png)](https://user-images.githubusercontent.com/108584943/226547755-77fbe17e-6d58-4c11-a0e4-310a9e97ca87.mp4)
 
 <details>
     <summary>Click to see image</summary>
