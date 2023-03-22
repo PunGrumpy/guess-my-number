@@ -61,7 +61,7 @@ This is a simple game that you have to guess the number that the computer has ch
 - [Maven](https://maven.apache.org/) - Dependency management
 - [GitHub Actions](https://github.com/features/actions) - CI/CD
 
-## Table of contents
+## Table of contents 🌳
 
 ```bash
 ├─── .github
