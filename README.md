@@ -75,7 +75,7 @@ This is a simple game that you have to guess the number that the computer has ch
 └─── README.md
 ```
 
-## Pre-requires 📋
+## Pre-requisites 📋
 
 - [Java 17](https://www.oracle.com/java/technologies/downloads/#java17) or higher
 - [Maven 3.9.1](https://maven.apache.org/download.cgi) or higher
