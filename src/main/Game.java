@@ -32,7 +32,7 @@ public class Game extends JFrame {
     this.setIconImage(
         Toolkit
           .getDefaultToolkit()
-          .getImage(imageLoader.getImageUrl("images/icon.png"))
+          .getImage(imageLoader.getImageUrl("asset/icon.png"))
       );
     this.setResizable(false);
     this.setLocationRelativeTo(null);
