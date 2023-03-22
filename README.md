@@ -28,9 +28,9 @@ This is a simple game that you have to guess the number that the computer has ch
 
 ## Author 🙋‍♂️
 
-- [Teachin Pongmanee (NongFeen)](https://github.com/NongFeen)
-- [Teeradon Numthong (custapq)](https://github.com/custapq)
-- [Noppakorn Kaewsalabnil (PunGrumpy)](https://github.com/PunGrumpy)
+- [Teachin Pongmanee (NongFeen)](https://github.com/NongFeen) 🧪💻
+- [Teeradon Numthong (custapq)](https://github.com/custapq) 🧪🥂
+- [Noppakorn Kaewsalabnil (PunGrumpy)](https://github.com/PunGrumpy) 💻🎨🚩
 
 ## Features 📌
 
