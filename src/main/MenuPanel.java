@@ -17,6 +17,9 @@ import utility.ImageLoader;
 public class MenuPanel extends JPanel {
 
   private final Game game;
+  private final String homePath = System.getProperty("user.home");
+  private final String scoreFile = homePath + "/guess-my-number/data/SCORE.dat";
+  private final String highScoreFile = homePath + "/guess-my-number/data/HIGHSCORE.dat";
 
   private transient Database database;
   private transient ImageLoader imageLoader;
@@ -35,7 +38,7 @@ public class MenuPanel extends JPanel {
 
   private void Render() {
     database.setScore(0);
-    database.saveScore();
+    database.saveDatabase(scoreFile);
 
     JLabel title = new JLabel("Guess My Number 🔮");
     title.setForeground(ColorScheme.black);
@@ -53,9 +56,9 @@ public class MenuPanel extends JPanel {
 
     JLabel highest_score = new JLabel(
       "Score: " +
-      database.showScore() +
+      database.showDatabase(scoreFile) +
       "   🏆   High Score: " +
-      database.showHighScore()
+      database.showDatabase(highScoreFile)
     );
     highest_score.setForeground(ColorScheme.black);
     highest_score.setFont(new Font(Font.DIALOG, Font.BOLD, 20));

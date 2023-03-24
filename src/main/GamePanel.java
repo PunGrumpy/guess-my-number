@@ -33,6 +33,9 @@ import utility.SoundLoader;
 public class GamePanel extends JPanel {
 
   private final Game game;
+  private final String homePath = System.getProperty("user.home");
+  private final String scoreFile = homePath + "/guess-my-number/data/SCORE.dat";
+  private final String highScoreFile = homePath + "/guess-my-number/data/HIGHSCORE.dat";
 
   private transient Sound music;
   private transient Database database;
@@ -55,8 +58,8 @@ public class GamePanel extends JPanel {
 
     this.game = game;
 
-    SCORE = database.showScore();
-    HIGH_SCORE = database.showHighScore();
+    SCORE = database.showDatabase(scoreFile);
+    HIGH_SCORE = database.showDatabase(highScoreFile);
 
     BoxLayout boxlayout = new BoxLayout(this, BoxLayout.Y_AXIS);
     this.setLayout(boxlayout);
@@ -316,7 +319,7 @@ public class GamePanel extends JPanel {
             if (SCORE >= 1) {
               SCORE--;
               database.setScore(SCORE);
-              database.saveScore();
+              database.saveDatabase(scoreFile);
               status_value.setText("I'll give you a hint: " + hint);
               status_value.setFont(new Font(Font.DIALOG, Font.BOLD, 15));
               score_label.setText(
@@ -378,10 +381,10 @@ public class GamePanel extends JPanel {
         "Score: " + SCORE + "   🏆   High Score: " + HIGH_SCORE
       );
       database.setScore(SCORE);
-      database.saveScore();
+      database.saveDatabase(scoreFile);
       if (SCORE > HIGH_SCORE) {
         database.setHighScore(SCORE);
-        database.saveHighScore();
+        database.saveDatabase(highScoreFile);
       }
       return;
     }
@@ -447,15 +450,16 @@ public class GamePanel extends JPanel {
       hint_button.setVisible(false);
       source_code.setVisible(false);
       SCORE++;
+      database.setScore(SCORE);
+      database.saveDatabase(scoreFile);
+      if (SCORE > HIGH_SCORE) {
+        HIGH_SCORE = SCORE;
+        database.setHighScore(SCORE);
+        database.saveDatabase(highScoreFile);
+      }
       score_label.setText(
         "Score: " + SCORE + "   🏆   High Score: " + HIGH_SCORE
       );
-      database.setScore(SCORE);
-      database.saveScore();
-      if (SCORE > HIGH_SCORE) {
-        database.setHighScore(SCORE);
-        database.saveHighScore();
-      }
     } else if (Integer.parseInt(guess_field.getText()) > UNKNOW_NUMBER) {
       status_value.setText(guess_field.getText() + " is too high!");
       guess_field.setText("");
