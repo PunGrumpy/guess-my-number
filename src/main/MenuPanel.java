@@ -19,7 +19,8 @@ public class MenuPanel extends JPanel {
   private final Game game;
   private final String homePath = System.getProperty("user.home");
   private final String scoreFile = homePath + "/guess-my-number/data/SCORE.dat";
-  private final String highScoreFile = homePath + "/guess-my-number/data/HIGHSCORE.dat";
+  private final String highScoreFile =
+    homePath + "/guess-my-number/data/HIGHSCORE.dat";
 
   private transient Database database;
   private transient ImageLoader imageLoader;
