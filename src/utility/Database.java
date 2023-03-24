@@ -8,8 +8,9 @@ public class Database {
 
   private final String homePath = System.getProperty("user.home");
   private final String scoreFile = homePath + "/guess-my-number/data/SCORE.dat";
-  private final String highScoreFile = homePath + "/guess-my-number/data/HIGHSCORE.dat";
-  
+  private final String highScoreFile =
+    homePath + "/guess-my-number/data/HIGHSCORE.dat";
+
   private int score, highScore;
 
   public Database() {
@@ -52,9 +53,9 @@ public class Database {
       File file = new File(filePath);
       Scanner scan = new Scanner(file);
       if (!scan.hasNextInt()) {
-        if(filePath.equals(scoreFile)) {
+        if (filePath.equals(scoreFile)) {
           score = 0;
-        } else if(filePath.equals(highScoreFile)) {
+        } else if (filePath.equals(highScoreFile)) {
           highScore = 0;
         }
         saveDatabase(filePath);
@@ -82,9 +83,9 @@ public class Database {
     try {
       File file = new File(filePath);
       PrintWriter output = new PrintWriter(file);
-      if(filePath.equals(scoreFile)) {
+      if (filePath.equals(scoreFile)) {
         output.println(score);
-      } else if(filePath.equals(highScoreFile)) {
+      } else if (filePath.equals(highScoreFile)) {
         output.println(highScore);
       }
       output.close();
