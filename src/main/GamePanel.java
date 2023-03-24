@@ -25,10 +25,9 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import utility.ColorScheme;
 import utility.Database;
-import utility.ImageLoader;
 import utility.RandomNumber;
 import utility.Sound;
-import utility.SoundLoader;
+import utility.Loader;
 
 public class GamePanel extends JPanel {
 
@@ -41,8 +40,8 @@ public class GamePanel extends JPanel {
   private transient Sound music;
   private transient Database database;
   private transient RandomNumber randomNumber;
-  private transient ImageLoader imageLoader;
-  private transient SoundLoader soundLoader;
+  private transient Loader.ImageLoader imageLoader;
+  private transient Loader.SoundLoader soundLoader;
 
   private int SCORE, HIGH_SCORE;
   private int UNKNOW_NUMBER, RANGE_NUMBER;
@@ -52,8 +51,8 @@ public class GamePanel extends JPanel {
     music = new Sound();
     database = new Database();
     randomNumber = new RandomNumber();
-    imageLoader = new ImageLoader();
-    soundLoader = new SoundLoader();
+    imageLoader = new Loader().new ImageLoader();
+    soundLoader = new Loader().new SoundLoader();
     UNKNOW_NUMBER = randomNumber.GET_RANDOM_NUMBER();
     RANGE_NUMBER = randomNumber.GET_RANGE_NUMBER();
 

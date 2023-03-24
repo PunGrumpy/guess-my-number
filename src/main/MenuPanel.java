@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import utility.ColorScheme;
 import utility.Database;
-import utility.ImageLoader;
+import utility.Loader;
 
 public class MenuPanel extends JPanel {
 
@@ -23,11 +23,11 @@ public class MenuPanel extends JPanel {
     homePath + "/guess-my-number/data/HIGHSCORE.dat";
 
   private transient Database database;
-  private transient ImageLoader imageLoader;
+  private transient Loader.ImageLoader imageLoader;
 
   public MenuPanel(Game game) {
     database = new Database();
-    imageLoader = new ImageLoader();
+    imageLoader = new Loader().new ImageLoader();
 
     this.game = game;
 

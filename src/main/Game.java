@@ -6,20 +6,19 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
-import utility.ImageLoader;
+import utility.Loader;
 
 public class Game extends JFrame {
 
   private final int WIDTH = 360;
   private final int HEIGHT = WIDTH * 2;
-
-  private transient ImageLoader imageLoader;
+  private final Loader.ImageLoader imageLoader;
 
   protected JFrame jframe;
   protected JPanel viewPanel;
 
   public Game() {
-    imageLoader = new ImageLoader();
+    imageLoader = new Loader().new ImageLoader();
 
     viewPanel = new JPanel(new BorderLayout());
     this.setTitle("Guess My Number 🔮");
