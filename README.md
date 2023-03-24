@@ -104,3 +104,10 @@ java -jar target/guess-my-number-[version].jar
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feat/AmazingFeature`)
 5. Open a pull request
+
+---
+
+You can create your own **`GUESS MY NUMBER`** game for free without notifying me by forking this project under the following conditions:
+
+- Don't use UI design from this project 🎨
+- Add credit for this project in your project 📖
