@@ -38,6 +38,7 @@ This is a simple game that you have to guess the number that the computer has ch
 - [x] The computer will give you a hint whether the number you have chosen is higher or lower than the number that the computer has chosen
 - [x] Hint will be given in the form of a binary number
 - [x] The game will end when you guess the number correctly
+- [x] When you input the empty or string it not include easter egg, it will go to error page
 - [x] Easter egg for fun
 
 <details>
