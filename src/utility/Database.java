@@ -1,6 +1,7 @@
 package utility;
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Database {
@@ -43,6 +44,17 @@ public class Database {
   private void isFileEmpty() {
     try {
       File file = new File(scoreFile);
+      Scanner scan = new Scanner(file);
+      if (!scan.hasNextInt()) {
+        setDefault();
+      }
+      scan.close();
+    } catch (Exception e) {
+      System.out.println("Error: " + e);
+    }
+
+    try {
+      File file = new File(highScoreFile);
       Scanner scan = new Scanner(file);
       if (!scan.hasNextInt()) {
         setDefault();
@@ -116,7 +128,7 @@ public class Database {
   public void saveScore() {
     try {
       File file = new File(scoreFile);
-      java.io.PrintWriter output = new java.io.PrintWriter(file);
+      PrintWriter output = new PrintWriter(file);
       output.println(score);
       output.close();
     } catch (Exception e) {
@@ -127,7 +139,7 @@ public class Database {
   public void saveHighScore() {
     try {
       File file = new File(highScoreFile);
-      java.io.PrintWriter output = new java.io.PrintWriter(file);
+      PrintWriter output = new PrintWriter(file);
       output.println(highScore);
       output.close();
     } catch (Exception e) {
