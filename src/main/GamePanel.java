@@ -345,13 +345,13 @@ public class GamePanel extends JPanel {
 
     status_value.setFont(new Font(Font.DIALOG, Font.BOLD, 25));
 
-    if (guess_field.getText().equals("cheat")) {
+    if (guess_field.getText().toLowerCase().equals("cheat")) {
       status_value.setText("The answer is: " + UNKNOW_NUMBER);
       guess_field.setText(String.valueOf(UNKNOW_NUMBER));
       return;
     }
 
-    if (guess_field.getText().equals("I love suntana")) {
+    if (guess_field.getText().equals("I love Suntana")) {
       status_value.setText("Please give me more grade");
       music.soundEffect(
         getClass().getClassLoader().getResource("asset/correct.wav")
