@@ -14,7 +14,6 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -394,16 +393,21 @@ public class GamePanel extends JPanel {
       status_value.setText("Please enter a number! [" + EMPTY_INPUT + "/5]");
       guess_field.setText("");
 
-      if(EMPTY_INPUT == 5) {
+      if (EMPTY_INPUT == 5) {
         try {
-          Desktop.getDesktop().browse(new URI("https://www.youtube.com/watch?v=dQw4w9WgXcQ"));
-          JOptionPane.showMessageDialog(null, "Why you still input empty or string?");
+          Desktop
+            .getDesktop()
+            .browse(new URI("https://www.youtube.com/watch?v=dQw4w9WgXcQ"));
+          JOptionPane.showMessageDialog(
+            null,
+            "Why you still input empty or string?"
+          );
           EMPTY_INPUT = 0;
         } catch (IOException | URISyntaxException ex) {
           ex.printStackTrace();
         }
       }
-      
+
       return;
     }
 
