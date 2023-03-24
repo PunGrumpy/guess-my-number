@@ -398,13 +398,13 @@ public class GamePanel extends JPanel {
           null,
           "Why you still input empty or string?"
         );
-        
+
         try {
           Thread.sleep(1000);
         } catch (InterruptedException ex) {
           ex.printStackTrace();
         }
-        
+
         try {
           Desktop
             .getDesktop()
