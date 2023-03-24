@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.Cursor;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -10,6 +11,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -38,6 +43,7 @@ public class GamePanel extends JPanel {
 
   private int SCORE, HIGH_SCORE;
   private int UNKNOW_NUMBER, RANGE_NUMBER;
+  private int EMPTY_INPUT = 0;
 
   public GamePanel(Game game) {
     music = new Sound();
@@ -338,11 +344,6 @@ public class GamePanel extends JPanel {
     JLabel source_code,
     JLabel score_label
   ) {
-    if (guess_field.getText().equals("")) {
-      status_value.setText("Please enter a number!");
-      return;
-    }
-
     status_value.setFont(new Font(Font.DIALOG, Font.BOLD, 25));
 
     if (guess_field.getText().toLowerCase().equals("cheat")) {
@@ -389,8 +390,20 @@ public class GamePanel extends JPanel {
     try {
       Integer.parseInt(guess_field.getText());
     } catch (NumberFormatException e) {
-      status_value.setText("Please enter a number!");
+      EMPTY_INPUT++;
+      status_value.setText("Please enter a number! [" + EMPTY_INPUT + "/5]");
       guess_field.setText("");
+
+      if(EMPTY_INPUT == 5) {
+        try {
+          Desktop.getDesktop().browse(new URI("https://www.youtube.com/watch?v=dQw4w9WgXcQ"));
+          JOptionPane.showMessageDialog(null, "Why you still input empty or string?");
+          EMPTY_INPUT = 0;
+        } catch (IOException | URISyntaxException ex) {
+          ex.printStackTrace();
+        }
+      }
+      
       return;
     }
 
