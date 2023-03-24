@@ -394,15 +394,23 @@ public class GamePanel extends JPanel {
       guess_field.setText("");
 
       if (EMPTY_INPUT == 5) {
+        JOptionPane.showMessageDialog(
+          null,
+          "Why you still input empty or string?"
+        );
+        
+        try {
+          Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+          ex.printStackTrace();
+        }
+        
         try {
           Desktop
             .getDesktop()
             .browse(new URI("https://www.youtube.com/watch?v=dQw4w9WgXcQ"));
-          JOptionPane.showMessageDialog(
-            null,
-            "Why you still input empty or string?"
-          );
           EMPTY_INPUT = 0;
+          game.showView(new MenuPanel(game));
         } catch (IOException | URISyntaxException ex) {
           ex.printStackTrace();
         }
