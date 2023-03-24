@@ -48,8 +48,8 @@
             <resource>
                 <directory>${basedir}</directory>
                 <includes>
-                    <include>asset/*.png</include>
-                    <include>asset/*.wav</include>
+                    <include>src/resource/*.png</include>
+                    <include>src/resource/*.wav</include>
                 </includes>
             </resource>
         </resources>

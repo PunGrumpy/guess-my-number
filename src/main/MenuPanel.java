@@ -64,7 +64,7 @@ public class MenuPanel extends JPanel {
     add(highest_score);
 
     JLabel play_button = new JLabel(
-      new ImageIcon(imageLoader.getImageUrl("asset/play.png"))
+      new ImageIcon(imageLoader.getImageUrl("src/resource/play.png"))
     );
     play_button.setBorder(new EmptyBorder(35, 0, 0, 0));
     play_button.setAlignmentX(CENTER_ALIGNMENT);
@@ -94,7 +94,7 @@ public class MenuPanel extends JPanel {
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
     g.drawImage(
-      new ImageIcon(imageLoader.getImageUrl("asset/background_menu.png"))
+      new ImageIcon(imageLoader.getImageUrl("src/resource/background_menu.png"))
         .getImage(),
       0,
       0,
