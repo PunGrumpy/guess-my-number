@@ -33,14 +33,6 @@
         </contributor>
     </contributors>
 
-    <properties>
-        <maven.complier.source>3.10.0</maven.complier.source>
-        <maven.complier.target>3.10.0</maven.complier.target>
-        <sonar.organization>pungrumpy</sonar.organization>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-        <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
-    </properties>
-
     <build>
         <sourceDirectory>${basedir}/src</sourceDirectory>
         <testSourceDirectory>${basedir}/src/test</testSourceDirectory>
@@ -94,11 +86,6 @@
                     <source>1.9</source>
                     <target>1.9</target>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.9.1.2184</version>
             </plugin>
         </plugins>
     </build>
