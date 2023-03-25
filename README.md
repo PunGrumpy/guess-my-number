@@ -50,8 +50,9 @@ This is a simple game that you have to guess the number that the computer has ch
             <p>For see answer</p>
         </li>
         <li>
-            <h3><b>I love suntana<b></h3>
+            <h3><b>I love Suntana<b></h3>
             <p>For show teacher picture and then you win</p>
+            <p>⚠️ Case sensitive</p>
         </li>
     </ul>
 </details>
