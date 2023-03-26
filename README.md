@@ -7,7 +7,7 @@
 
 ## Analytics Contributions
 
-![Repobeats analytics image](https://repobeats.axiom.co/api/embed/a8fecf15d3b803f8b30d2e0d36d9e31034d23a6f.svg)
+![Repobeats analytics image](https://repobeats.axiom.co/api/embed/346fe41feedbdfed2587343c0c9fe074c8503063.svg)
 
 ## Demo 🎥
 
