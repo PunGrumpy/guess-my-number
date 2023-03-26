@@ -38,7 +38,7 @@ This is a simple game that you have to guess the number that the computer has ch
 - [x] The computer will give you a hint whether the number you have chosen is higher or lower than the number that the computer has chosen
 - [x] Hint will be given in the form of a binary number
 - [x] The game will end when you guess the number correctly
-- [x] When you input the empty or string it not include easter egg, it will go to error page
+- [x] When you input the empty or string (5 times) it not include easter egg, it will go to rickroll on YouTube
 - [x] Easter egg for fun
 
 <details>
@@ -99,6 +99,23 @@ java -jar target/guess-my-number-[version].jar
 
 # If you want to run via Visual Studio Code (VSCode) you must package the project first and then run the program (mvn clean package)
 ```
+
+## Troubleshooting 🐞
+
+- [x] If you have any problems, please open an issue or contact me directly on Discord (Grumpy#9760)
+- [x] If error show like this
+    
+    ```bash
+    Exception in thread "main" java.lang.NullPointerException: Cannot invoke "java.net.URL.toExternalForm()" because "location" is null
+        at java.desktop/javax.swing.ImageIcon.<init>(ImageIcon.java:232)
+        at main.MenuPanel.Render(MenuPanel.java:71)
+        at main.MenuPanel.<init>(MenuPanel.java:37)
+        at main.Game.<init>(Game.java:28)
+        at main.MainClass.main(MainClass.java:6)
+    ```
+    - [x] You must package the project first and then run the program (mvn clean package)
+- [x] Don't forget to add the version number in the jar file name
+- [x] If you want to run via Visual Studio Code (VSCode) you must package the project first and then run the program (mvn clean package)
 
 ## Contributing 🤝
 
