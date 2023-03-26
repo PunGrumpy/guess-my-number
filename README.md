@@ -96,6 +96,8 @@ mvn clean package
 
 # Run the program
 java -jar target/guess-my-number-[version].jar
+
+# If you want to run via Visual Studio Code (VSCode) you must package the project first and then run the program (mvn clean package)
 ```
 
 ## Contributing 🤝
